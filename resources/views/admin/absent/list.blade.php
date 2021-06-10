@@ -3,7 +3,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-danger">Absents Data</h6>
+        <h6 class="m-0 font-weight-bold" style="color: black">Absents Data</h6>
     </div>
     <!-- Card Body -->
     <div class="card-body">
@@ -27,7 +27,7 @@
                 <tbody>
                     @forelse ($datas as $key => $value)
                     <tr>
-                        <th scope="row">{{$key + 1}}</th>
+                        <th scope="row">{{++$key}}</th>
                         <td>{{$value->user->name}}</td>
                         <td>{{$value->user->project->nama}}</td>
                         <td>{{$value->date}}</td>
@@ -51,12 +51,12 @@
             </div>
         </div>
         <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            <button type="button" class="btn dropdown-toggle" style="background-color: #C9CACA; font-weight:bolder; color:black" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Print Data
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('pdf.cetak', ['pdf' => $value->id]) }}">Export PDF</a>
+                <a class="dropdown-item" href="/pdf/{{$value->id }}">Export PDF</a>
                 <a class="dropdown-item" href="#">Export Excel</a>
             </div>
         </div>

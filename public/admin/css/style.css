@@ -1,4 +1,6 @@
 .div-box {
+    width: 500px;
+    height: 500px;
     border-radius: 20px;
     margin: 20px 0px;
     background-color: #ffffff;
@@ -7,8 +9,8 @@
 }
 
 .User-img {
-    width: 100px;
-    height: 100px;
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid #ddd;

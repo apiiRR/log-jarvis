@@ -29,10 +29,10 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: black" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" style="background-color: #c9caca" href="/">
                 <div class="sidebar-brand-icon">
                     <img src="{{asset('images/cropped-logo-jarvis-samping.png')}}" alt="" width="90">
                 </div>
@@ -42,61 +42,61 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+            <li class="nav-item">
+                <a class="nav-link text-white" style="font-weight: bolder" href="/">
+                    <i class="fas fa-fw fa-tachometer-alt text-white"></i>
+                    <span>DASHBOARD</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <div class="sidebar-heading text-white">
                 Interface
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse" data-target="#collapseOne"
                     aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-tasks"></i>
-                    <span>Projects Data</span>
+                    <i class="fas fa-tasks text-white"></i>
+                    <span>PROJECT DATA</span>
                 </a>
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Projects Data</h6>
-                        <a class="collapse-item" href="{{route('project.index')}}">All Projects Data</a>
-                        <a class="collapse-item" href="{{route('project.create')}}">Create New Projects</a>
+                        <a class="collapse-item" href="{{route('project.index')}}">ALL PROJECT DATA</a>
+                        <a class="collapse-item" href="{{route('project.create')}}">CREATE NEW PROJECT</a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-user-friends"></i>
-                    <span>Absent Data</span>
+                    <i class="fas fa-user-friends text-white"></i>
+                    <span>ABSENT DATA</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Absent Data</h6>
-                        <a class="collapse-item" href="{{route('absent.index')}}">All Absent Data</a>
+                        <a class="collapse-item" href="{{route('absent.index')}}">ALL ABSENT DATA</a>
                         {{-- <a class="collapse-item" href="cards.html">Create New Absent</a> --}}
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse" data-target="#collapseThree"
                     aria-expanded="true" aria-controls="collapseThree">
-                    <i class="fas fa-umbrella-beach"></i>
-                    <span>Holiday List Data</span>
+                    <i class="fas fa-umbrella-beach text-white"></i>
+                    <span>HOLIDAY LIST DATA</span>
                 </a>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Holiday List Data</h6>
-                        <a class="collapse-item" href="{{route('holiday.index')}}">All Holiday List</a>
-                        <a class="collapse-item" href="{{route('holiday.create')}}">Create New Holiday</a>
+                        <a class="collapse-item" href="{{route('holiday.index')}}">ALL HOLIDAY LIST</a>
+                        <a class="collapse-item" href="{{route('holiday.create')}}">CREATE NEW HOLIDAY</a>
                     </div>
                 </div>
             </li>
@@ -108,10 +108,10 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content">
+            <div id="content" style="background-color: #D10010;">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #c9caca">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -128,7 +128,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                    class="mr-2 d-none d-lg-inline small" style="color: black; font-weight:600;">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="{{asset('admin/img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->

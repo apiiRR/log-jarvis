@@ -8,25 +8,27 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Jarvis-absent</title>
+    <title>Portal Absen</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet"> --}}
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light rounded-bottom shadow-sm" style="background-color: #BD0202;">
+        <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #c9caca">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
-                    JARVIS
+                    <img src="{{asset('images/cropped-logo-jarvis-samping.png')}}" width="120"
+                        class="d-inline-block align-top" alt="">
                 </a>
                 <button class="navbar-toggler bg-white" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,27 +48,28 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-dark" style="font-weight:bolder" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @endif
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link text-dark" style="font-weight:bolder" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-bold text-dark"
+                                style="font-weight: bolder" href="#" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background-color: #BD0202;">
-                                <a class="dropdown-item text-white" href="{{route('profil.index')}}">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('profil.index')}}">
                                     Profile
                                 </a>
-                                <a class="dropdown-item text-white" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
@@ -82,7 +85,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="background-color: #D10010; min-height: 600px">
             @yield('content')
         </main>
     </div>

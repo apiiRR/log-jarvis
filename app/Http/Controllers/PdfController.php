@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
@@ -86,8 +86,9 @@ class PdfController extends Controller
 
     public function cetak($id) {
         $datas = Data::all()->where('user_id', $id);
-        // dd($user);
-        $pdf = PDF::loadView('print_absent', $datas);
+        // dd($datas);
+        $pdf = PDF::loadView('print_absent', compact('datas'));
+        // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->download('absent.pdf');
     }

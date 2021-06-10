@@ -6,11 +6,11 @@
     <div class="container-fluid">
         <ul class="features-tab nav nav-pills justify-content-center" id="features-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="feature-tab-1" data-toggle="tab" href="#feature-1" role="tab"
+                <a class="nav-link active text-white" id="feature-tab-1" data-toggle="tab" href="#feature-1" role="tab"
                     aria-controls="feature-1" aria-selected="true"><span>Form Absen</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="feature-tab-2" data-toggle="tab" href="#feature-2" role="tab"
+                <a class="nav-link text-white" id="feature-tab-2" data-toggle="tab" href="#feature-2" role="tab"
                     aria-controls="feature-2" aria-selected="false">Data Absen</a>
             </li>
         </ul>
@@ -79,7 +79,8 @@
                                                 <label for="activity">Activity</label>
                                                 <input type="text" class="form-control" id="activity" name="activity">
                                             </div>
-                                            <button type="submit" class="btn btn-primary col-md-12">Simpan</button>
+                                            <button type="submit" class="btn col-md-12 text-white"
+                                                style="background-color: black">Save</button>
                                         </form>
                                     </div>
                                 </div>
@@ -135,7 +136,7 @@
                                                         <td>{{$value->activity}}</td>
                                                         <td>{{$value->site_name}}</td>
                                                         <td class="d-flex justify-content-center">
-                                                            <a href="" class="btn btn-danger" onclick="event.preventDefault();
+                                                            <a href="" class="btn btn-dark" onclick="event.preventDefault();
                                                      document.getElementById('delete').submit();"><i
                                                                     class="fas fa-trash"></i></a>
                                                             <form id="delete"

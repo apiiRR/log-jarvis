@@ -3,7 +3,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-danger">Projects Data</h6>
+        <h6 class="m-0 font-weight-bold" style="color: black">Projects Data</h6>
     </div>
     <!-- Card Body -->
     <div class="card-body">
@@ -29,9 +29,9 @@
                         <td>{{$value->day}}</td>
                         <td>{{$value->date}}</td>
                         <td class="d-flex justify-content-center">
-                            <a href="" class="btn btn-danger" onclick="event.preventDefault();
+                            <a href="" class="btn" style="background-color: black" onclick="event.preventDefault();
                                                      document.getElementById('delete').submit();"><i
-                                    class="fas fa-trash"></i></a>
+                                    class="fas fa-trash text-white"></i></a>
                             <form id="delete" action="{{ route('holiday.destroy', ['holiday' => $value->id]) }}"
                                 method="POST">
                                 @csrf
