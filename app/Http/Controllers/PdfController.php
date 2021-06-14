@@ -86,8 +86,19 @@ class PdfController extends Controller
 
     public function cetak($id) {
         $datas = Data::all()->where('user_id', $id);
-        // dd($datas);
+        // dd($datas[1]->user->name);
+        // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
         $pdf = PDF::loadView('print_absent', compact('datas'));
+        // $pdf = PDF::loadView('print_absent', $datas);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->download('absent.pdf');
+    }
+
+    public function user($id) {
+        $datas = Data::all()->where('user_id', $id);
+        // dd($datas[1]->user->name);
+        // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
+        $pdf = PDF::loadView('print_absent_user', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'landscape');
         return $pdf->download('absent.pdf');

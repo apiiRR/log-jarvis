@@ -6,7 +6,7 @@
         <div class="card-header">{{ __('Update Account') }}</div>
 
         <div class="card-body">
-            <form method="POST" action="{{route('profile.update', ['profile' => $user->id])}}">
+            <form method="POST" action="{{route('profil.update', ['profil' => $user->id])}}">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
@@ -14,7 +14,7 @@
 
                     <div class="col-md-6">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" value="{{$user->name}}" required autocomplete="name" autofocus>
+                            name="name" value="{{$user->name}}" autocomplete="name" autofocus>
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
 
                     <div class="col-md-6">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                            name="email" value="{{$user->email}}" required autocomplete="email">
+                            name="email" value="{{$user->email}}" autocomplete="email">
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
 
                     <div class="col-md-6">
                         <input id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
+                            class="form-control @error('password') is-invalid @enderror" name="password"
                             autocomplete="new-password">
 
                         @error('password')
@@ -61,13 +61,13 @@
 
                     <div class="col-md-6">
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password">
+                         autocomplete="new-password">
                     </div>
                 </div>
 
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn text-white" style="background-color: black">
                             {{ __('Update') }}
                         </button>
                     </div>

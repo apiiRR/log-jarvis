@@ -121,7 +121,7 @@
                                                         <th scope="col">Total</th>
                                                         <th scope="col">Activity</th>
                                                         <th scope="col">Site</th>
-                                                        <th scope="col">Action</th>
+                                                        {{-- <th scope="col">Action</th> --}}
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -135,9 +135,12 @@
                                                         <td>{{$value->total_hours}}</td>
                                                         <td>{{$value->activity}}</td>
                                                         <td>{{$value->site_name}}</td>
-                                                        <td class="d-flex justify-content-center">
+                                                        {{-- <td class="d-flex justify-content-center">
+                                                            <a href="{{route('data.edit', ['data' => $value->id])}}"
+                                                                class="btn btn-dark mr-2"><i
+                                                                    class="fas fa-edit"></i></a>
                                                             <a href="" class="btn btn-dark" onclick="event.preventDefault();
-                                                     document.getElementById('delete').submit();"><i
+                                                    document.getElementById('delete').submit();"><i
                                                                     class="fas fa-trash"></i></a>
                                                             <form id="delete"
                                                                 action="{{ route('data.destroy', ['data' => $value->id]) }}"
@@ -147,7 +150,7 @@
                                                                 {{-- <input type="submit" class="btn btn-danger"
                                                                     value="Delete"> --}}
                                                             </form>
-                                                        </td>
+                                                        </td> --}}
                                                     </tr>
                                                     @empty
                                                     <tr>
@@ -159,6 +162,8 @@
                                             <div class="table-responsive">
                                             </div>
                                         </div>
+                                        <a href="/cpdf/{{Auth::user()->id}}" class="btn text-white"
+                                            style="background-color: black">Print Data</a>
                                     </div>
                                 </div>
                             </div>

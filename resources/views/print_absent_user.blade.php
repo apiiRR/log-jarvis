@@ -42,7 +42,6 @@
                             <th scope="col">Total Hours</th>
                             <th scope="col">Activity</th>
                             <th scope="col">Site Name</th>
-                            <th scope="col">Remark</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +54,6 @@
                             <td>{{$item->total_hours}}</td>
                             <td>{{$item->activity}}</td>
                             <td>{{$item->site_name}}</td>
-                            <td>{{$item->remark}}</td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -9,11 +9,11 @@
     <div class="card-body">
         <form action="{{ route('holiday.store') }}" method="POST">
             @csrf
-            <div class="form-group">
+            <div class="form-group" style="color: black">
                 <label for="date">Date</label>
                 <input type="date" class="form-control" id="date" name="date" onchange="ubahTanggal()">
             </div>
-            <div class="form-group">
+            <div class="form-group" style="color: black">
                 <label for="day">Day</label>
                 <input type="text" class="form-control" id="day" name="day" readonly>
             </div>

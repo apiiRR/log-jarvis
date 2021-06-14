@@ -39,5 +39,7 @@ Route::resource('profil', 'ProfilController');
 
 Route::get('/pdf/{pdf_id}', 'PdfController@cetak');
 
+Route::get('/cpdf/{pdf_id}', 'PdfController@user');
+
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 

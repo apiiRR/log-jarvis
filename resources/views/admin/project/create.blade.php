@@ -9,7 +9,7 @@
     <div class="card-body">
         <form action="{{ route('project.store') }}" method="POST">
             @csrf
-            <div class="form-group">
+            <div class="form-group" style="color: black">
                 <label for="project">Project Name</label>
                 <input type="text" class="form-control" id="project" name="project">
             </div>

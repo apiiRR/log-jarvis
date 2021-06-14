@@ -44,7 +44,7 @@
 
                     <div class="col-md-6">
                         <input id="password" type="password"
-                            class="form-control @error('password') is-invalid @enderror" name="password" required
+                            class="form-control @error('password') is-invalid @enderror" name="password"
                             autocomplete="new-password">
 
                         @error('password')
@@ -61,13 +61,13 @@
 
                     <div class="col-md-6">
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                            required autocomplete="new-password">
+                            autocomplete="new-password">
                     </div>
                 </div>
 
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn" style="background-color: #C9CACA; font-weight:bolder; color:black">
                             {{ __('Update') }}
                         </button>
                     </div>

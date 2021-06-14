@@ -101,7 +101,8 @@ class DataController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Data::find($id);
+        return view('user.edit', compact('data'));
     }
 
     /**
@@ -113,7 +114,45 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lembur = " ";
+        $total = $request["total_hours"];
+        $time_out = $request["time_out"];
+        // dd(strtotime($time_out) >= strtotime('21:00'));
+        $total_jam = explode(':',$total, 2);
+        $t_jam = intval($total_jam[0]);
+        $t_menit = intval($total_jam[1]);
+        $total_menit = ($t_jam * 60) + $t_menit;
+        $tanggal = $request["date"];
+        $hari = $request["day"];
+        $holiday = Holiday::select('date')->get()->toArray();
+
+        if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggal, $holiday))) {
+            if ($total_menit >= 240) {
+                $lembur = "weekend 1";
+            } elseif ($total_menit >= 480) {
+                $lembur = "weekend 2";
+            }
+        } else {
+            if (strtotime($time_out) >= strtotime('21:00')) {
+                $lembur = "lembur 1";
+            } elseif (strtotime($time_out) >= strtotime('00:00')) {
+                $lembur = "lembur 2";
+            }
+        }
+
+        $data = Data::where('id', $id)->update([
+            "date" => $request["date"],
+            "day" => $request["day"],
+            "time_in" => $request["time_in"],
+            "time_out" => $request["time_out"],
+            "total_hours" => $request["total_hours"],
+            "activity" => $request["activity"],
+            "site_name" => $request["site_name"],
+            "user_id" => $request["name"],
+            "remark" => $lembur,
+        ]);
+
+        return redirect('/home')->with('success', 'Data updated successfully');
     }
 
     /**

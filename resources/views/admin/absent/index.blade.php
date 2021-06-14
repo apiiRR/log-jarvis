@@ -7,28 +7,35 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
+        @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{session('success')}}
+        </div>
+        @endif
         {{-- <form action="/list" method="POST">
             @csrf
             <label for="nama" class="text-left">{{ __('Choose Name') }}</label>
-            <select id="nama" class="form-control" name="nama">
-                <option>--Choose Option--</option>
-                @foreach ($names as $name)
-                <option value="{{ $name->id }}">
-                    {{ $name->name }}
-                </option>
-                @endforeach
-            </select>
-            <button type="submit" class="btn btn-primary mt-3">Show</button>
+        <select id="nama" class="form-control" name="nama">
+            <option>--Choose Option--</option>
+            @foreach ($names as $name)
+            <option value="{{ $name->id }}">
+                {{ $name->name }}
+            </option>
+            @endforeach
+        </select>
+        <button type="submit" class="btn btn-primary mt-3">Show</button>
         </form> --}}
         <div class="dropdown">
             <div class="row">
-                <button class="btn dropdown-toggle col-md-12" style="background-color: #C9CACA; font-weight:bolder; color:black" type="button" id="dropdownMenuButton2"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn dropdown-toggle col-md-12"
+                    style="background-color: #C9CACA; font-weight:bolder; color:black" type="button"
+                    id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                     Choose Name
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark w-100" aria-labelledby="dropdownMenuButton2">
                     @foreach ($names as $name)
-                    <li><a class="dropdown-item bg-white" href="/list/{{$name->id }}" style="font-weight: 900;">{{ $name->name }}</a></li>
+                    <li><a class="dropdown-item bg-white" href="/list/{{$name->id }}"
+                            style="font-weight: 900;">{{ $name->name }}</a></li>
                     @endforeach
                 </ul>
             </div>
