@@ -108,13 +108,13 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content" style="background-color: #D10010;">
+            <div id="content" style="background-color: #8c1212;">
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #c9caca">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="background-color: black; color:white;">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -192,6 +192,8 @@
     <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script>
     @stack('javascript')
+    @include('sweetalert::alert')
+
 
 </body>
 

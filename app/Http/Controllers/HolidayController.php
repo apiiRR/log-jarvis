@@ -41,6 +41,11 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'date' => 'required|date',
+            'day' => 'required|max:255',
+        ]);
+        
         $data = Holiday::create([
             "date" => $request["date"],
             "day" => $request["day"],

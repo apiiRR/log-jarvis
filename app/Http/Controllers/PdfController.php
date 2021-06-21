@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Data;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PdfController extends Controller
 {
@@ -13,6 +14,11 @@ class PdfController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -84,9 +90,9 @@ class PdfController extends Controller
         //
     }
 
-    public function cetak($id) {
-        $datas = Data::all()->where('user_id', $id);
-        // dd($datas[1]->user->name);
+    public function cetak($id, $month) {
+        $datas = Data::where('user_id', $id)->whereMonth('date', $month)->get();
+        // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
         $pdf = PDF::loadView('print_absent', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
@@ -94,8 +100,11 @@ class PdfController extends Controller
         return $pdf->download('absent.pdf');
     }
 
-    public function user($id) {
-        $datas = Data::all()->where('user_id', $id);
+    public function user($month) {
+        // dd($from, $to);
+        $datas = Data::where('user_id', Auth::user()->id)->whereMonth('date', $month)->get();
+        // $datas = $datas
+        // dd($datas);
         // dd($datas[1]->user->name);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
         $pdf = PDF::loadView('print_absent_user', compact('datas'));

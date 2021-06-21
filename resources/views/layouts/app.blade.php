@@ -30,10 +30,12 @@
                     <img src="{{asset('images/cropped-logo-jarvis-samping.png')}}" width="120"
                         class="d-inline-block align-top" alt="">
                 </a>
-                <button class="navbar-toggler bg-white" type="button" data-toggle="collapse"
+                <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                    <span style="color: white">
+                        <i class="fas fa-sliders-h"></i>
+                    </span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,16 +50,22 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="font-weight:bolder" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link text-dark" style="font-weight:bolder"
+                                href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @endif
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="font-weight:bolder" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link text-dark" style="font-weight:bolder"
+                                href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
+                        <li class="nav-item">
+                            <a class="nav-link text-bold text-dark" style="font-weight: bolder"
+                                href="{{route('data_user.index')}}">Data</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle text-bold text-dark"
                                 style="font-weight: bolder" href="#" role="button" data-toggle="dropdown"
@@ -85,12 +93,14 @@
             </div>
         </nav>
 
-        <main class="py-4" style="background-color: #D10010; min-height: 600px">
+        <main class="py-4" style="background-color: #8c1212; min-height: 600px">
             @yield('content')
         </main>
     </div>
 
     @stack('javascript')
+    @include('sweetalert::alert')
+
 
 </body>
 

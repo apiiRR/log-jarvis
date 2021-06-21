@@ -3,11 +3,6 @@
 @section('content')
 <div class="container d-flex justify-content-center">
     <div class="div-box">
-        @if (session('success'))
-        <div class="alert alert-success text-center" role="alert">
-            {{session('success')}}
-        </div>
-        @endif
         <div class="User-img">
             <img src="{{asset('admin/img/undraw_profile.svg')}}">
         </div>

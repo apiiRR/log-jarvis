@@ -60,12 +60,41 @@ class DataController extends Controller
                 $lembur = "weekend 2";
             }
         } else {
-            if (strtotime($time_out) >= strtotime('21:00')) {
+            if ((strtotime($time_out) >= strtotime('19:00')) and (strtotime($time_out) <= strtotime('21:00'))) {
                 $lembur = "lembur 1";
-            } elseif (strtotime($time_out) >= strtotime('00:00')) {
+            } elseif (strtotime($time_out) >= strtotime('21:00')) {
                 $lembur = "lembur 2";
             }
         }
+
+        $intensive = "";
+        switch ($lembur) {
+            case "lembur 1":
+                $intensive = 25000;
+                break;
+            case "lembur 2":
+                $intensive = 50000;
+                break;
+            case "weekend 1":
+                $intensive = 50000;
+                break;
+            case "weekend 2":
+                $intensive = 150000;
+            break;
+            default:
+                $intensive = "";
+        }
+
+        $request->validate([
+            'date' => 'required|date',
+            'day' => 'required|max:255',
+            'time_in' => 'required',
+            'time_out' => 'required',
+            'total_hours' => 'required',
+            'activity' => 'required|max:255',
+            'site_name' => 'required|max:255',
+            'name' => 'required',
+        ]);
 
         $data = Data::create([
             "date" => $request["date"],
@@ -77,6 +106,7 @@ class DataController extends Controller
             "site_name" => $request["site_name"],
             "user_id" => $request["name"],
             "remark" => $lembur,
+            "intensive" => $intensive,
         ]);
 
         return redirect('/home')->with('success', 'Data saved successfully');
@@ -114,7 +144,7 @@ class DataController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $lembur = " ";
+        $lembur = "none";
         $total = $request["total_hours"];
         $time_out = $request["time_out"];
         // dd(strtotime($time_out) >= strtotime('21:00'));
@@ -133,12 +163,41 @@ class DataController extends Controller
                 $lembur = "weekend 2";
             }
         } else {
-            if (strtotime($time_out) >= strtotime('21:00')) {
+            if ((strtotime($time_out) >= strtotime('19:00')) and (strtotime($time_out) <= strtotime('21:00'))) {
                 $lembur = "lembur 1";
-            } elseif (strtotime($time_out) >= strtotime('00:00')) {
+            } elseif (strtotime($time_out) >= strtotime('21:00')) {
                 $lembur = "lembur 2";
             }
         }
+
+        $intensive = 0;
+        switch ($lembur) {
+            case "lembur 1":
+                $intensive = 25000;
+                break;
+            case "lembur 2":
+                $intensive = 50000;
+                break;
+            case "weekend 1":
+                $intensive = 50000;
+                break;
+            case "weekend 2":
+                $intensive = 150000;
+            break;
+            default:
+                $intensive = 0;
+        }
+
+        $request->validate([
+            'date' => 'required|date',
+            'day' => 'required|max:255',
+            'time_in' => 'required',
+            'time_out' => 'required',
+            'total_hours' => 'required',
+            'activity' => 'required|max:255',
+            'site_name' => 'required|max:255',
+            'name' => 'required',
+        ]);
 
         $data = Data::where('id', $id)->update([
             "date" => $request["date"],
@@ -150,9 +209,10 @@ class DataController extends Controller
             "site_name" => $request["site_name"],
             "user_id" => $request["name"],
             "remark" => $lembur,
+            "intensive" => $intensive,
         ]);
 
-        return redirect('/home')->with('success', 'Data updated successfully');
+        return redirect('/data_user')->with('success', 'Data updated successfully');
     }
 
     /**
@@ -164,6 +224,6 @@ class DataController extends Controller
     public function destroy($id)
     {
         Data::destroy($id);
-        return redirect('/home')->with('success', 'Data deleted successfully');
+        return redirect('/data_user')->with('success', 'Data deleted successfully');
     }
 }

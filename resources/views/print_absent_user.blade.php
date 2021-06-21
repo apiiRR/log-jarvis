@@ -10,15 +10,62 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Data Absent</title>
 </head>
 
 <body>
+    @php
+    $date = date_create($datas[0]->date);
+    $bulan = date_format($date, "n");
+    $namaBulan = "";
+    switch ($bulan) {
+    case "1":
+    $namaBulan = "January";
+    break;
+    case "2":
+    $namaBulan = "February";
+    break;
+    case "3":
+    $namaBulan = "March";
+    break;
+    case "4":
+    $namaBulan = "April";
+    break;
+    case "5":
+    $namaBulan = "May";
+    break;
+    case "6":
+    $namaBulan = "June";
+    break;
+    case "7":
+    $namaBulan = "July";
+    break;
+    case "8":
+    $namaBulan = "August";
+    break;
+    case "9":
+    $namaBulan = "September";
+    break;
+    case "10":
+    $namaBulan = "October";
+    break;
+    case "11":
+    $namaBulan = "November";
+    break;
+    case "12":
+    $namaBulan = "December";
+    break;
+    default:
+    echo "Data tidak ditemukan ";
+    }
+    // dd($namaBulan);
+    @endphp
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs text-left">
-                <small>Project : {{$datas[1]->user->project->nama}}</small><br />
-                <small>Employee : {{$datas[1]->user->name}}</small>
+                <small>Project : {{$datas[0]->user->project->nama}}</small><br />
+                <small>Employee : {{$datas[0]->user->name}}</small><br />
+                <small>Period : {{$namaBulan}}</small>
             </div>
             <div class="col-xs text-right">
                 <div style="margin-right: 65px">
@@ -66,7 +113,7 @@
                 <br>
                 <br>
                 <br>
-                <h6>{{$datas[1]->user->name}}</h6>
+                <h6>{{$datas[0]->user->name}}</h6>
             </div>
             <div class="col-xs text-center">
                 <small>Manager</small>

@@ -3,11 +3,6 @@
 @section('content')
 <div class="container">
     <div class="div-box mx-auto">
-        @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{session('success')}}
-        </div>
-        @endif
         <div class="User-img">
             <img src="{{asset('admin/img/undraw_profile.svg')}}">
         </div>

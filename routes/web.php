@@ -37,9 +37,11 @@ Route::resource('holiday', 'HolidayController');
 
 Route::resource('profil', 'ProfilController');
 
-Route::get('/pdf/{pdf_id}', 'PdfController@cetak');
+Route::resource('data_user', 'DataUserController');
 
-Route::get('/cpdf/{pdf_id}', 'PdfController@user');
+Route::get('/pdf/{id}/{month}', 'PdfController@cetak');
+
+Route::get('/cpdf/{month}', 'PdfController@user');
 
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 

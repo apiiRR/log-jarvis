@@ -7,11 +7,6 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-        @if (session('success'))
-        <div class="alert alert-success" role="alert">
-            {{session('success')}}
-        </div>
-        @endif
         {{-- <form action="/list" method="POST">
             @csrf
             <label for="nama" class="text-left">{{ __('Choose Name') }}</label>

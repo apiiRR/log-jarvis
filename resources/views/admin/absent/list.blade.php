@@ -4,9 +4,9 @@
 @php
 $ui = '';
 if (sizeof($datas) == 0) {
-    $ui = '';
+$ui = '';
 } else {
-    $ui = $datas[0]->user_id;
+$ui = $datas[0]->user_id;
 }
 // dd($ui);
 @endphp
@@ -31,6 +31,7 @@ if (sizeof($datas) == 0) {
                         <th scope="col">Activity</th>
                         <th scope="col">Site</th>
                         <th scope="col">Remark</th>
+                        <th scope="col">Intensive</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -48,6 +49,7 @@ if (sizeof($datas) == 0) {
                         <td>{{$value->activity}}</td>
                         <td>{{$value->site_name}}</td>
                         <td>{{$value->remark}}</td>
+                        <td>Rp @php echo number_format($value->intensive,2,',','.') @endphp</td>
                         <td class="d-flex justify-content-center">
                             <a href="{{route('absent.edit', ['absent' => $value->id])}}" class="btn btn-dark mr-2"><i
                                     class="fas fa-edit"></i></a>
@@ -74,14 +76,47 @@ if (sizeof($datas) == 0) {
             <div class="table-responsive">
             </div>
         </div>
-        <div class="btn-group">
-            <button type="button" class="btn dropdown-toggle"
-                style="background-color: #C9CACA; font-weight:bolder; color:black" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Print Data
-            </button>
-            <div class="dropdown-menu">
-                <a href="/pdf/{{$ui}}" class="dropdown-item">Export PDF</a>
+        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal"
+            style="background-color: #C9CACA; font-weight:bolder; color:black">
+            Print Data
+        </button>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Range Time</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="bulan">Month</label>
+                        <select class="form-control" id="bulan">
+                            <option value="">--Choose--</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        <input type="text" id="user_id" value="{{$ui}}" readonly hidden>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a class="btn text-white" style="background-color: black"
+                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('bulan').value " target="_blank">Print</a>
+                </div>
             </div>
         </div>
     </div>

@@ -43,6 +43,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'project' => 'required|string|max:255',
+        ]);
+
         $project = Project::create([
             "nama" => $request["project"],
         ]);

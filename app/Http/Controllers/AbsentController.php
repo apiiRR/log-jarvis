@@ -81,7 +81,7 @@ class AbsentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $lembur = " ";
+        $lembur = "none";
         $total = $request["total_hours"];
         $time_out = $request["time_out"];
         // dd(strtotime($time_out) >= strtotime('21:00'));
@@ -100,12 +100,41 @@ class AbsentController extends Controller
                 $lembur = "weekend 2";
             }
         } else {
-            if (strtotime($time_out) >= strtotime('21:00')) {
+            if ((strtotime($time_out) >= strtotime('19:00')) and (strtotime($time_out) <= strtotime('21:00'))) {
                 $lembur = "lembur 1";
-            } elseif (strtotime($time_out) >= strtotime('00:00')) {
+            } elseif (strtotime($time_out) >= strtotime('21:00')) {
                 $lembur = "lembur 2";
             }
         }
+
+        $intensive = 0;
+        switch ($lembur) {
+            case "lembur 1":
+                $intensive = 25000;
+                break;
+            case "lembur 2":
+                $intensive = 50000;
+                break;
+            case "weekend 1":
+                $intensive = 50000;
+                break;
+            case "weekend 2":
+                $intensive = 150000;
+            break;
+            default:
+                $intensive = 0;
+        }
+
+        $request->validate([
+            'date' => 'required|date',
+            'day' => 'required|max:255',
+            'time_in' => 'required',
+            'time_out' => 'required',
+            'total_hours' => 'required',
+            'activity' => 'required|max:255',
+            'site_name' => 'required|max:255',
+            'name' => 'required',
+        ]);
 
         $data = Data::where('id', $id)->update([
             "date" => $request["date"],
@@ -117,6 +146,7 @@ class AbsentController extends Controller
             "site_name" => $request["site_name"],
             "user_id" => $request["name"],
             "remark" => $lembur,
+            "intensive" => $intensive,
         ]);
 
         return redirect('/absent')->with('success', 'Data updated successfully');
@@ -138,7 +168,7 @@ class AbsentController extends Controller
     }
 
     public function tampil($id){
-        $datas = Data::all()->where('user_id', $id);
+        $datas = Data::where('user_id', $id)->get();
         // dd($datas);
         return view('admin.absent.list', compact('datas'));
     }

@@ -8,55 +8,50 @@
             <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-header text-center">{{ __('Form Edit') }}</div>
-                    @if (session('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{session('success')}}
-                    </div>
-                    @endif
                     <div class="card-body">
                         <form action="{{route('data.update', ['data' => $data->id])}}" method="POST">
                             @csrf
-                            @method('PUT');
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="nama">Name</label>
-                                <input type="text" class="form-control" id="nama" value="{{$data->user->name}}"
+                                <input required type="text" class="form-control" id="nama" value="{{$data->user->name}}"
                                     readonly>
-                                <input type="text" value="{{$data->user_id}}" name="name" readonly hidden>
+                                <input required type="text" value="{{$data->user_id}}" name="name" readonly hidden>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="tanggal">Date</label>
-                                    <input type="date" class="tanggal form-control" value="{{$data->date}}" id="tanggal" name="date" onchange="ubahTanggal()">
+                                    <input required type="date" class="tanggal form-control" value="{{$data->date}}" id="tanggal" name="date" onchange="ubahTanggal()">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="hari">Day</label>
-                                    <input type="text" class="form-control" id="hari" name="day" value="{{$data->day}}" readonly>
+                                    <input required type="text" class="form-control" id="hari" name="day" value="{{$data->day}}" readonly>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="time-in">Time In</label>
-                                    <input type="time" class="form-control" value="{{$data->time_in}}" id="time-in" name="time_in">
+                                    <input required type="time" class="form-control" value="{{$data->time_in}}" id="time-in" name="time_in">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="time-out">Time Out</label>
-                                    <input type="time" class="form-control" value="{{$data->time_out}}" id="time-out" name="time_out"
+                                    <input required type="time" class="form-control" value="{{$data->time_out}}" id="time-out" name="time_out"
                                         onchange="totalJam()">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="total">Total Hours</label>
-                                    <input type="text" class="form-control" value="{{$data->total_hours}}" id="total" name="total_hours" readonly>
+                                    <input required type="text" class="form-control" value="{{$data->total_hours}}" id="total" name="total_hours" readonly>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="site">Site Name</label>
-                                    <input type="text" class="form-control" value="{{$data->site_name}}" id="site" name="site_name">
+                                    <input required type="text" class="form-control" value="{{$data->site_name}}" id="site" name="site_name">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="activity">Activity</label>
-                                <input type="text" class="form-control" value="{{$data->activity}}" id="activity" name="activity">
+                                <input required type="text" class="form-control" value="{{$data->activity}}" id="activity" name="activity">
                             </div>
                             <button type="submit" class="btn col-md-12 text-white"
                                 style="background-color: black">Update</button>
