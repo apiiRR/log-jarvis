@@ -39,6 +39,8 @@ Route::resource('profil', 'ProfilController');
 
 Route::resource('data_user', 'DataUserController');
 
+Route::resource('user', 'UserController');
+
 Route::get('/pdf/{id}/{month}', 'PdfController@cetak');
 
 Route::get('/cpdf/{month}', 'PdfController@user');

@@ -32,7 +32,8 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: black" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" style="background-color: #c9caca" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" style="background-color: #c9caca"
+                href="/">
                 <div class="sidebar-brand-icon">
                     <img src="{{asset('images/cropped-logo-jarvis-samping.png')}}" alt="" width="90">
                 </div>
@@ -57,8 +58,23 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse"
+                    data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    <i class="fas fa-tasks text-white"></i>
+                    <span>DATA USER</span>
+                </a>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Data User</h6>
+                        <a class="collapse-item" href="{{route('user.index')}}">ALL USER DATA</a>
+                        {{--  <a class="collapse-item" href="{{route('project.create')}}">CREATE NEW PROJECT</a> --}}
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse"
+                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <i class="fas fa-tasks text-white"></i>
                     <span>PROJECT DATA</span>
                 </a>
@@ -72,8 +88,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse"
+                    data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-user-friends text-white"></i>
                     <span>ABSENT DATA</span>
                 </a>
@@ -87,8 +103,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse"
+                    data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-umbrella-beach text-white"></i>
                     <span>HOLIDAY LIST DATA</span>
                 </a>
@@ -111,10 +127,12 @@
             <div id="content" style="background-color: #8c1212;">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" style="background-color: #c9caca">
+                <nav class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow"
+                    style="background-color: #c9caca">
 
                     <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3" style="background-color: black; color:white;">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
+                        style="background-color: black; color:white;">
                         <i class="fa fa-bars"></i>
                     </button>
 
@@ -127,8 +145,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span
-                                    class="mr-2 d-none d-lg-inline small" style="color: black; font-weight:600;">{{ Auth::user()->name }}</span>
+                                <span class="mr-2 d-none d-lg-inline small"
+                                    style="color: black; font-weight:600;">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="{{asset('admin/img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
