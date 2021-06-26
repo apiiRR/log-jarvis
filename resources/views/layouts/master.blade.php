@@ -147,7 +147,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline small"
                                     style="color: black; font-weight:600;">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="{{asset('admin/img/undraw_profile.svg')}}">
+                                @if (!empty(Auth::user()->photo))
+                                    <img class="img-profile rounded-circle" src="{{asset('images/'.Auth::user()->photo)}}">
+                                @else
+                                    <img class="img-profile rounded-circle" src="{{asset('admin/img/undraw_profile.svg')}}">
+                                @endif
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

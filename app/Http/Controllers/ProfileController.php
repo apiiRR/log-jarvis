@@ -82,16 +82,28 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
         ]);
 
+        if (!empty($request->photo)) {
+            $request->validate([
+                'photo' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
+            ]);
+            $fileName = time().'.'.$request->photo->extension();
+            $request->photo->move(public_path('images'), $fileName);
+        } else {
+            $fileName = '';
+        }
+
         if ($request['password'] == '') {
             $update = User::where('id', $id)->update([
                 'name' => $request['name'],
                 'email' => $request['email'],
+                'photo' => $fileName,
             ]);
         } else {
             $update = User::where('id', $id)->update([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
+                'photo' => $fileName,
             ]);
         }
 

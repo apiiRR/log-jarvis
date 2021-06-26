@@ -50,7 +50,7 @@
                                 <select id="project" @error('project') is-invalid @enderror"
                                     class="form-control @error('project') is-invalid @enderror" name="project_id"
                                     required>
-                                    <option>--Choose Option--</option>
+                                    <option value="">--Choose Option--</option>
                                     @foreach ($countries as $country)
                                     <option value="{{ $country->id }}">
                                         {{ $country->nama }}
@@ -59,11 +59,9 @@
 
                                 </select>
 
-                                @error('project_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                @if ($errors->has('project_id'))
+                                <span class="text-danger">Project cannot null</span>
+                                @endif
                             </div>
                         </div>
 

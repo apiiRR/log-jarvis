@@ -88,19 +88,23 @@
 
         let hours = jamAkhir.split(':')[0] - jamAwal.split(':')[0];
         let minutes = jamAkhir.split(':')[1] - jamAwal.split(':')[1];
+        // console.log(hours);
+        // console.log(minutes);
 
-        if (jamAwal <= "12:00" && jamAkhir >= "13:00") {
-            a = 1;
-        } else {
-            a = 0;
-        }
+        // if (jamAwal <= "12:00" && jamAkhir >= "13:00") {
+        //     a = 1;
+        // } else {
+        //     a = 0;
+        // }
         minutes = minutes.toString().length < 2 ? '0' + minutes : minutes;
         if (minutes < 0) {
             hours--;
             minutes = 60 + minutes;
         }
         hours = hours.toString().length < 2 ? '0' + hours : hours;
-        document.querySelector('#total').value = hours - a + ':' + minutes;
+        document.querySelector('#total').value = hours + ':' + minutes;
+        // console.log(hours);
+        // console.log(minutes);
     }
 </script>
 @endpush

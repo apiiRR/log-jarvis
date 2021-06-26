@@ -73,7 +73,8 @@ $tanggalSekarang = date("Y-m-d");
                     @method('PUT')
                     <div class="form-group">
                         <label for="nama">Name</label>
-                        <input required type="text" class="form-control" id="nama" value="{{Auth::user()->name}}" readonly>
+                        <input required type="text" class="form-control" id="nama" value="{{Auth::user()->name}}"
+                            readonly>
                         <input required type="text" value="{{Auth::user()->id}}" name="name" readonly hidden>
                     </div>
                     <div class="form-row">
@@ -82,8 +83,8 @@ $tanggalSekarang = date("Y-m-d");
                             @if ($datas == null)
                             <input required type="date" class="tanggal form-control" id="tanggal" name="date" readonly>
                             @else
-                            <input required type="date" value="{{$datas->date}}" class="tanggal form-control" id="tanggal"
-                                name="date" readonly>
+                            <input required type="date" value="{{$datas->date}}" class="tanggal form-control"
+                                id="tanggal" name="date" readonly>
                             @endif
                         </div>
                         <div class="form-group col-md-6">
@@ -160,24 +161,54 @@ $tanggalSekarang = date("Y-m-d");
     ubahTanggal();
 
     function totalJam() {
+        let mydate = new Date;
+        let dateNow = document.querySelector('#tanggal').value;
+        var date = mydate.toJSON().slice(0, 10);
+        var nDate = date.slice(0, 4) + '-' +
+            date.slice(5, 7) + '-' +
+            date.slice(8, 10);
         let jamAwal = document.querySelector("#time-in").value;
         let jamAkhir = document.querySelector("#time_out").value;
+        let tanggal = document.querySelector("#tanggal").value;
+        // console.log(nDate == tanggal);
+        // console.log(tanggal);
 
-        let hours = jamAkhir.split(':')[0] - jamAwal.split(':')[0];
-        let minutes = jamAkhir.split(':')[1] - jamAwal.split(':')[1];
+        if (tanggal != nDate) {
+            batas1 = "23:59";
+            batas2 = "00:00";
+            let hours1 = batas.split(':')[0] - jamAwal.split(':')[0];
+            let minutes1 = batas.split(':')[1] - jamAwal.split(':')[1];
 
-        if (jamAwal <= "12:00" && jamAkhir >= "13:00") {
-            a = 1;
+            let hours2 = jamAkhir.split(':')[0] - batas2.split(':')[0];
+            let minutes2 = jamAkhir.split(':')[1] - batas2.split(':')[1];
+
+            let totalHours = hours1 + hours2;
+            let totalMinutes = minutes1 + minutes2;
+
+            totalMinutes = totalMinutes.toString().length < 2 ? '0' + totalMinutes : totalMinutes;
+
+            if (totalMinutes > 59) {
+                totalHours++;
+                totalMinutes = totalMinutes - 60;
+            }
+
+            totalHours = totalHours.toString().length < 2 ? '0' + hours : hours;
+
+            document.querySelector('#total').value = totalHours + ':' + totalMinutes;
+
         } else {
-            a = 0;
+
+            let hours = jamAkhir.split(':')[0] - jamAwal.split(':')[0];
+            let minutes = jamAkhir.split(':')[1] - jamAwal.split(':')[1];
+
+            minutes = minutes.toString().length < 2 ? '0' + minutes : minutes;
+            if (minutes < 0) {
+                hours--;
+                minutes = 60 + minutes;
+            }
+            hours = hours.toString().length < 2 ? '0' + hours : hours;
+            document.querySelector('#total').value = hours + ':' + minutes;
         }
-        minutes = minutes.toString().length < 2 ? '0' + minutes : minutes;
-        if (minutes < 0) {
-            hours--;
-            minutes = 60 + minutes;
-        }
-        hours = hours.toString().length < 2 ? '0' + hours : hours;
-        document.querySelector('#total').value = hours - a + ':' + minutes;
     }
 
     totalJam();

@@ -163,9 +163,9 @@ class DataController extends Controller
                 $lembur = "weekend 2";
             }
         } else {
-            if ((strtotime($time_out) >= strtotime('19:00')) and (strtotime($time_out) <= strtotime('21:00'))) {
+            if (strtotime($time_out) >= strtotime('21:00')) {
                 $lembur = "lembur 1";
-            } elseif (strtotime($time_out) >= strtotime('21:00')) {
+            } elseif (strtotime($time_out) >= strtotime('23:59')) {
                 $lembur = "lembur 2";
             }
         }

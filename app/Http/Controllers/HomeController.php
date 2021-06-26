@@ -32,6 +32,7 @@ class HomeController extends Controller
             // dd($datas);
             return view('admin.index', compact('datas'));
         } elseif (Auth::user()->role == 'user') { // Role User
+            date_default_timezone_set('Asia/Jakarta');
             $user = Auth::user()->id;
             $tanggal = date("Y-m-d");
             $datas = Data::where('user_id', $user)->where('date', $tanggal)->orderBy('id', 'desc')->first();

@@ -36,6 +36,9 @@ $ui = $datas[0]->user_id;
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $total = 0;
+                    @endphp
                     @forelse ($datas as $key => $value)
                     <tr>
                         <th scope="row">{{++$key}}</th>
@@ -64,6 +67,13 @@ $ui = $datas[0]->user_id;
                                                                     value="Delete"> --}}
                             </form>
                         </td>
+                        @php
+                            $total += $value->intensive;
+                        @endphp
+                    </tr>
+                    <tr>
+                        <td colspan="11" class="text-center">Total</td>
+                        <td>Rp @php echo number_format($total,2,',','.') @endphp</td>
                     </tr>
                     @empty
                     <tr>
@@ -115,7 +125,8 @@ $ui = $datas[0]->user_id;
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a class="btn text-white" style="background-color: black"
-                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('bulan').value " target="_blank">Print</a>
+                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('bulan').value "
+                        target="_blank">Print</a>
                 </div>
             </div>
         </div>

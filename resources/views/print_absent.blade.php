@@ -94,6 +94,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $total = 0;
+                        @endphp
                         @foreach ($datas as $item)
                         <tr>
                             <td>{{$item->date}}</td>
@@ -105,8 +108,15 @@
                             <td>{{$item->site_name}}</td>
                             <td>{{$item->remark}}</td>
                             <td>Rp @php echo number_format($item->intensive,2,',','.') @endphp</td>
+                            @php
+                            $total += $item->intensive;
+                            @endphp
                         </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="8" class="text-center">Total</td>
+                            <td>Rp @php echo number_format($total,2,',','.') @endphp</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

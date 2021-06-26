@@ -6,7 +6,8 @@
         <div class="card-header">{{ __('Update Account') }}</div>
 
         <div class="card-body">
-            <form method="POST" action="{{route('profil.update', ['profil' => $user->id])}}">
+            <form method="POST" action="{{route('profil.update', ['profil' => $user->id])}}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
@@ -61,7 +62,19 @@
 
                     <div class="col-md-6">
                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                         autocomplete="new-password">
+                            autocomplete="new-password">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="photo" class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="photo" type="file" class="form-control" name="photo">
+                        <small id="photo" class="form-text text-muted">jpeg,png,jpg,gif,svg (max 2mb)</small>
+                        @if ($errors->has('photo'))
+                        <span class="text-danger">{{ $errors->first('photo') }}</span>
+                        @endif
                     </div>
                 </div>
 
