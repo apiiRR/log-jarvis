@@ -37,15 +37,15 @@ $ui = $datas[0]->user_id;
                 </thead>
                 <tbody>
                     @php
-                        $total = 0;
+                    $total = 0;
                     @endphp
                     @forelse ($datas as $key => $value)
                     <tr>
                         <th scope="row">{{++$key}}</th>
                         <td>{{$value->user->name}}</td>
                         <td>{{$value->user->project->nama}}</td>
-                        <td>{{$value->date}}</td>
-                        <td>{{$value->day}}</td>
+                        <td>{{$value->date_in}}</td>
+                        <td>{{$value->day_in}}</td>
                         <td>{{$value->time_in}}</td>
                         <td>{{$value->time_out}}</td>
                         <td>{{$value->total_hours}}</td>
@@ -68,18 +68,18 @@ $ui = $datas[0]->user_id;
                             </form>
                         </td>
                         @php
-                            $total += $value->intensive;
+                        $total += $value->intensive;
                         @endphp
-                    </tr>
-                    <tr>
-                        <td colspan="11" class="text-center">Total</td>
-                        <td>Rp @php echo number_format($total,2,',','.') @endphp</td>
                     </tr>
                     @empty
                     <tr>
                         <td colspan="12">No Data</td>
                     </tr>
                     @endforelse
+                    <tr>
+                        <td colspan="11" class="text-center">Total</td>
+                        <td>Rp @php echo number_format($total,2,',','.') @endphp</td>
+                    </tr>
                 </tbody>
                 </tbody>
             </table>

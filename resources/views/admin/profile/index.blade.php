@@ -15,8 +15,8 @@
         <h3 class="User-name">Name : {{Auth::user()->name}}</h3>
         <h4 class="designation">Email : {{Auth::user()->email}}</h4>
         <div class="contact-btn">
-            <a href="{{route('profile.show', ['profile' => Auth::user()->id])}}" class="btn"
-                style="background-color: #C9CACA; font-weight:bolder; color:black">Update</a>
+            <a href="{{route('profile.show', ['profile' => Auth::user()->id])}}" class="btn text-white"
+                style="background-color: black;">Update</a>
         </div>
     </div>
 </div>

@@ -99,8 +99,8 @@
                         @endphp
                         @foreach ($datas as $item)
                         <tr>
-                            <td>{{$item->date}}</td>
-                            <td>{{$item->day}}</td>
+                            <td>{{$item->date_in}}</td>
+                            <td>{{$item->day_in}}</td>
                             <td>{{$item->time_in}}</td>
                             <td>{{$item->time_out}}</td>
                             <td>{{$item->total_hours}}</td>

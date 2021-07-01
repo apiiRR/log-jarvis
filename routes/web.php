@@ -41,6 +41,10 @@ Route::resource('data_user', 'DataUserController');
 
 Route::resource('user', 'UserController');
 
+Route::get('control', 'ControlController@index');
+
+Route::post('/status/update', 'ControlController@updateStatus')->name('users.update.status');
+
 Route::get('/pdf/{id}/{month}', 'PdfController@cetak');
 
 Route::get('/cpdf/{month}', 'PdfController@user');

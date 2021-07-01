@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Data;
-use PDF;
+use App\Models\Control;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class PdfController extends Controller
+class ControlController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +19,9 @@ class PdfController extends Controller
 
     public function index()
     {
-        //
+        $status = Control::where('id', '1')->first();
+        // dd($status);
+        return view('admin.past_data.index', compact('status'));
     }
 
     /**
@@ -90,26 +90,16 @@ class PdfController extends Controller
         //
     }
 
-    public function cetak($id, $month) {
-        $datas = Data::where('user_id', $id)->whereMonth('date_in', $month)->get();
-        // dd($datas);
-        // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
-        $pdf = PDF::loadView('print_absent', compact('datas'));
-        // $pdf = PDF::loadView('print_absent', $datas);
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('absent.pdf');
-    }
-
-    public function user($month) {
-        // dd($from, $to);
-        $datas = Data::where('user_id', Auth::user()->id)->whereMonth('date_in', $month)->get();
-        // $datas = $datas
-        // dd($datas);
-        // dd($datas[1]->user->name);
-        // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
-        $pdf = PDF::loadView('print_absent_user', compact('datas'));
-        // $pdf = PDF::loadView('print_absent', $datas);
-        $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('absent.pdf');
+    public function updateStatus(Request $request)
+    {
+        // dd($request->mode);
+        if($request->mode == "true")
+        {
+            $affected_products = Control::where('id', '=', $request->comment_id)->update(array('kondisi' => 1));
+        }
+        else
+        {
+            $affected_products = Control::where('id', '=', $request->comment_id)->update(array('kondisi' => 0));
+        }
     }
 }

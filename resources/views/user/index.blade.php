@@ -47,6 +47,11 @@ $tanggalSekarang = date("Y-m-d");
                             data-target=".bd-example-modal-lg">Time Out</a>
                     </div>
                     @endif
+                    <div class="col-md-12">
+                        <small id="passwordHelpBlock" class="form-text text-center text-white">
+                            Jika anda sudah melakukan absen, abaikan tombol <i>Time_In</i> yang <i>Aktif</i>.
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -78,22 +83,21 @@ $tanggalSekarang = date("Y-m-d");
                         <input required type="text" value="{{Auth::user()->id}}" name="name" readonly hidden>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="tanggal">Date</label>
+                        <div class="form-group col-md-4">
+                            <label for="tanggal">Date In</label>
                             @if ($datas == null)
-                            <input required type="date" class="tanggal form-control" id="tanggal" name="date" readonly>
+                            <input required type="date" class="tanggal form-control" id="tanggal_in" name="date_in"
+                                readonly>
                             @else
-                            <input required type="date" value="{{$datas->date}}" class="tanggal form-control"
-                                id="tanggal" name="date" readonly>
+                            <input required type="date" value="{{$datas->date_in}}" class="tanggal form-control"
+                                id="tanggal_in" name="date_in" readonly>
                             @endif
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="hari">Day</label>
-                            <input required type="text" class="form-control" id="hari" name="day" readonly>
+                        <div class="form-group col-md-4">
+                            <label for="hari">Day In</label>
+                            <input required type="text" class="form-control" id="hari_in" name="day_in" readonly>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="time-in">Time In</label>
                             @if ($datas == null)
                             <input required type="time" class="form-control" id="time-in" name="time_in" readonly>
@@ -102,7 +106,18 @@ $tanggalSekarang = date("Y-m-d");
                                 name="time_in" readonly>
                             @endif
                         </div>
-                        <div class="form-group col-md-6">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="tanggal">Date Out</label>
+                            <input required type="date" class="tanggal form-control" id="tanggal_out" name="date_out"
+                                readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="hari">Day Out</label>
+                            <input required type="text" class="form-control" id="hari_out" name="day_out" readonly>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label for="time-out">Time Out</label>
                             <input required type="time" class="form-control" id="time_out" name="time_out" readonly>
                         </div>
@@ -119,7 +134,7 @@ $tanggalSekarang = date("Y-m-d");
                     </div>
                     <div class="form-group">
                         <label for="activity">Activity</label>
-                        <input required type="text" class="form-control" id="activity" name="activity">
+                        <textarea required type="text" class="form-control" id="activity" name="activity"></textarea>
                     </div>
 
                 </div>
@@ -138,13 +153,32 @@ $tanggalSekarang = date("Y-m-d");
 @push('javascript')
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
+    Date.prototype.toJSONLocal = (function () {
+        function addZ(n) {
+            return (n < 10 ? '0' : '') + n;
+        }
+        return function () {
+            return this.getFullYear() + '-' +
+                addZ(this.getMonth() + 1) + '-' +
+                addZ(this.getDate());
+        };
+    }())
+
     function ubahTanggal() {
         let mydate = new Date;
-        let dateNow = document.querySelector('#tanggal').value;
-        var date = mydate.toJSON().slice(0, 10);
-        var nDate = date.slice(0, 4) + '-' +
+        // let jakarta = new Date().toLocaleString("en-US", {timeZone: "Asia/Jakarta"});
+        // let mydate = new Date(jakarta);
+        console.log(mydate);
+        // let tanggalJakarta = mydate.toString();
+        // console.log(tanggalJakarta)
+        let dateNow = document.querySelector('#tanggal_in').value;
+        // document.querySelector('#tanggal_out').value = weekDayName;
+        let date = mydate.toJSONLocal().slice(0, 10);
+        console.log(date);
+        let nDate = date.slice(0, 4) + '-' +
             date.slice(5, 7) + '-' +
             date.slice(8, 10);
+        console.log(nDate);
         let weekDayName = moment(dateNow).format('dddd');
         let minutes = mydate.getMinutes();
         minutes = minutes > 9 ? minutes : '0' + minutes;
@@ -153,31 +187,35 @@ $tanggalSekarang = date("Y-m-d");
         let timeNow = hours + ":" + minutes;
         document.querySelector('#time_out').value = timeNow;
         console.log(timeNow);
-        // document.querySelector('#tanggal').value = nDate;
-        document.querySelector('#hari').value = weekDayName;
-        // console.log(nDate);
+        document.querySelector('#tanggal_out').value = nDate;
+        document.querySelector('#hari_in').value = weekDayName;
+        let weekDayNameOut = moment(mydate).format('dddd');
+        document.querySelector('#hari_out').value = weekDayNameOut;
     }
 
     ubahTanggal();
 
     function totalJam() {
         let mydate = new Date;
-        let dateNow = document.querySelector('#tanggal').value;
+        let dateIn = document.querySelector('#tanggal_in').value;
+        let dateOut = document.querySelector('#tanggal_out').value;
+        console.log(dateIn);
+        console.log(dateOut);
         var date = mydate.toJSON().slice(0, 10);
         var nDate = date.slice(0, 4) + '-' +
             date.slice(5, 7) + '-' +
             date.slice(8, 10);
         let jamAwal = document.querySelector("#time-in").value;
         let jamAkhir = document.querySelector("#time_out").value;
-        let tanggal = document.querySelector("#tanggal").value;
+        // let tanggal = document.querySelector("#tanggal").value;
         // console.log(nDate == tanggal);
         // console.log(tanggal);
 
-        if (tanggal != nDate) {
-            batas1 = "23:59";
-            batas2 = "00:00";
-            let hours1 = batas.split(':')[0] - jamAwal.split(':')[0];
-            let minutes1 = batas.split(':')[1] - jamAwal.split(':')[1];
+        if (dateIn != dateOut) {
+            let batas1 = "23:59";
+            let batas2 = "00:00";
+            let hours1 = batas1.split(':')[0] - jamAwal.split(':')[0];
+            let minutes1 = batas1.split(':')[1] - jamAwal.split(':')[1];
 
             let hours2 = jamAkhir.split(':')[0] - batas2.split(':')[0];
             let minutes2 = jamAkhir.split(':')[1] - batas2.split(':')[1];
@@ -192,7 +230,7 @@ $tanggalSekarang = date("Y-m-d");
                 totalMinutes = totalMinutes - 60;
             }
 
-            totalHours = totalHours.toString().length < 2 ? '0' + hours : hours;
+            totalHours = totalHours.toString().length < 2 ? '0' + totalHours : totalHours;
 
             document.querySelector('#total').value = totalHours + ':' + totalMinutes;
 

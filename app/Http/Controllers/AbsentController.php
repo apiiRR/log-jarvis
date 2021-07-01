@@ -83,26 +83,28 @@ class AbsentController extends Controller
     {
         $lembur = "none";
         $total = $request["total_hours"];
+        // dd($request);
         $time_out = $request["time_out"];
         // dd(strtotime($time_out) >= strtotime('21:00'));
         $total_jam = explode(':',$total, 2);
         $t_jam = intval($total_jam[0]);
         $t_menit = intval($total_jam[1]);
         $total_menit = ($t_jam * 60) + $t_menit;
-        $tanggal = $request["date"];
-        $hari = $request["day"];
+        $tanggalMasuk = $request["date_in"];
+        $tanggalKeluar = $request["date_out"];
+        $hari = $request["day_in"];
         $holiday = Holiday::select('date')->get()->toArray();
 
-        if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggal, $holiday))) {
+        if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggalMasuk, $holiday))) {
             if ($total_menit >= 240) {
                 $lembur = "weekend 1";
             } elseif ($total_menit >= 480) {
                 $lembur = "weekend 2";
             }
         } else {
-            if ((strtotime($time_out) >= strtotime('19:00')) and (strtotime($time_out) <= strtotime('21:00'))) {
+            if (strtotime($time_out) >= strtotime('21:00')) {
                 $lembur = "lembur 1";
-            } elseif (strtotime($time_out) >= strtotime('21:00')) {
+            } elseif ($tanggalMasuk != $tanggalKeluar) {
                 $lembur = "lembur 2";
             }
         }
@@ -126,9 +128,11 @@ class AbsentController extends Controller
         }
 
         $request->validate([
-            'date' => 'required|date',
-            'day' => 'required|max:255',
+            'date_in' => 'required|date',
+            'day_in' => 'required|max:255',
             'time_in' => 'required',
+            'date_out' => 'required|date',
+            'day_out' => 'required|max:255',
             'time_out' => 'required',
             'total_hours' => 'required',
             'activity' => 'required|max:255',
@@ -137,9 +141,11 @@ class AbsentController extends Controller
         ]);
 
         $data = Data::where('id', $id)->update([
-            "date" => $request["date"],
-            "day" => $request["day"],
+            "date_in" => $request["date_in"],
+            "day_in" => $request["day_in"],
             "time_in" => $request["time_in"],
+            "date_out" => $request["date_out"],
+            "day_out" => $request["day_out"],
             "time_out" => $request["time_out"],
             "total_hours" => $request["total_hours"],
             "activity" => $request["activity"],
@@ -148,6 +154,7 @@ class AbsentController extends Controller
             "remark" => $lembur,
             "intensive" => $intensive,
         ]);
+
 
         return redirect('/absent')->with('success', 'Data updated successfully');
     }

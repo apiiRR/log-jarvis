@@ -30,8 +30,8 @@
                         <th scope="row">{{$key + 1}}</th>
                         <td>{{$value->user->name}}</td>
                         <td>{{$value->user->project->nama}}</td>
-                        <td>{{$value->date}}</td>
-                        <td>{{$value->day}}</td>
+                        <td>{{$value->date_in}}</td>
+                        <td>{{$value->day_in}}</td>
                         <td>{{$value->time_in}}</td>
                         <td>{{$value->time_out}}</td>
                         <td>{{$value->total_hours}}</td>

@@ -35,7 +35,8 @@ class HomeController extends Controller
             date_default_timezone_set('Asia/Jakarta');
             $user = Auth::user()->id;
             $tanggal = date("Y-m-d");
-            $datas = Data::where('user_id', $user)->where('date', $tanggal)->orderBy('id', 'desc')->first();
+            // $datas = Data::where('user_id', $user)->where('date_in', $tanggal)->orderBy('id', 'desc')->first();
+            $datas = Data::where('user_id', $user)->whereNotNull('date_in')->whereNull('date_out')->orderBy('id', 'desc')->first();
             // $datas = $user->datas;
             // dd($datas);
             return view('user.index', compact('datas'));

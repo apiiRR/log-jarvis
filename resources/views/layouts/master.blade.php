@@ -20,6 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
+    @stack('tambahan')
 
 </head>
 
@@ -113,6 +114,21 @@
                         <h6 class="collapse-header">Holiday List Data</h6>
                         <a class="collapse-item" href="{{route('holiday.index')}}">ALL HOLIDAY LIST</a>
                         <a class="collapse-item" href="{{route('holiday.create')}}">CREATE NEW HOLIDAY</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed text-white" style="font-weight: bolder" href="#" data-toggle="collapse"
+                    data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                    <i class="fas fa-pencil-alt text-white"></i>
+                    <span>CONTROL ADMIN</span>
+                </a>
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Control Admin</h6>
+                        <a class="collapse-item" href="/control">STATUS</a>
+                        {{-- <a class="collapse-item" href="{{route('holiday.create')}}">CREATE NEW HOLIDAY</a> --}}
                     </div>
                 </div>
             </li>

@@ -97,21 +97,22 @@ class DataUserController extends Controller
         $t_jam = intval($total_jam[0]);
         $t_menit = intval($total_jam[1]);
         $total_menit = ($t_jam * 60) + $t_menit;
-        $tanggal = $request["date"];
-        $hari = $request["day"];
+        $tanggalMasuk = $request["date_in"];
+        $tanggalKeluar = $request["date_out"];
+        $hari = $request["day_in"];
         $holiday = Holiday::select('date')->get()->toArray();
 
-        function bedaHari($tanggal) {
-            date_default_timezone_set('Asia/Jakarta');
-            $tanggalNow = date("Y-m-d");
-            $tanggal = $tanggal;
-            $result = $tanggalNow != $tanggal;
+        // function bedaHari($tanggal) {
+        //     date_default_timezone_set('Asia/Jakarta');
+        //     $tanggalNow = date("Y-m-d");
+        //     $tanggal = $tanggal;
+        //     $result = $tanggalNow != $tanggal;
 
-            return $result;
-        }
+        //     return $result;
+        // }
         // dd(bedaHari($tanggal));
 
-        if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggal, $holiday))) {
+        if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggalMasuk, $holiday))) {
             if ($total_menit >= 240) {
                 $lembur = "weekend 1";
             } elseif ($total_menit >= 480) {
@@ -120,7 +121,7 @@ class DataUserController extends Controller
         } else {
             if (strtotime($time_out) >= strtotime('21:00')) {
                 $lembur = "lembur 1";
-            } elseif (bedaHari($tanggal) == "true") {
+            } elseif ($tanggalMasuk != $tanggalKeluar) {
                 $lembur = "lembur 2";
             }
         }
@@ -144,9 +145,11 @@ class DataUserController extends Controller
         }
 
         $request->validate([
-            'date' => 'required|date',
-            'day' => 'required|max:255',
+            'date_in' => 'required|date',
+            'day_in' => 'required|max:255',
             'time_in' => 'required',
+            'date_out' => 'required|date',
+            'day_out' => 'required|max:255',
             'time_out' => 'required',
             'total_hours' => 'required',
             'activity' => 'required|max:255',
@@ -155,9 +158,11 @@ class DataUserController extends Controller
         ]);
 
         $data = Data::where('id', $id)->update([
-            "date" => $request["date"],
-            "day" => $request["day"],
+            "date_in" => $request["date_in"],
+            "day_in" => $request["day_in"],
             "time_in" => $request["time_in"],
+            "date_out" => $request["date_out"],
+            "day_out" => $request["day_out"],
             "time_out" => $request["time_out"],
             "total_hours" => $request["total_hours"],
             "activity" => $request["activity"],
