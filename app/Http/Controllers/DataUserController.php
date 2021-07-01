@@ -50,7 +50,7 @@ class DataUserController extends Controller
         $tanggal = date("Y-m-d");
 
         $data = Data::create([
-            'date' => $tanggal,
+            "date_in" => $tanggal,
             "time_in" => $time,
             "user_id" => Auth::user()->id,
         ]);
