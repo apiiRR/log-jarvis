@@ -24,15 +24,15 @@
                         <td>{{$value->day}}</td>
                         <td>{{$value->date}}</td>
                         <td class="d-flex justify-content-center">
-                            <a href="" class="btn" style="background-color: black" onclick="event.preventDefault();
+{{--                             <a href="" class="btn" style="background-color: black" onclick="event.preventDefault();
                                                      document.getElementById('delete').submit();"><i
-                                    class="fas fa-trash text-white"></i></a>
+                                    class="fas fa-trash text-white"></i></a> --}}
                             <form id="delete" action="{{ route('holiday.destroy', ['holiday' => $value->id]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
-                                {{-- <input type="submit" class="btn btn-danger"
-                                                                    value="Delete"> --}}
+                                <button type="submit" class="btn btn-dark"><i
+                                        class="fas fa-trash text-white"></i></button>
                             </form>
                         </td>
                     </tr>

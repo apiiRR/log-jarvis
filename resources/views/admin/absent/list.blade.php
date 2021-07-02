@@ -56,15 +56,14 @@ $ui = $datas[0]->user_id;
                         <td class="d-flex justify-content-center">
                             <a href="{{route('absent.edit', ['absent' => $value->id])}}" class="btn btn-dark mr-2"><i
                                     class="fas fa-edit"></i></a>
-                            <a href="" class="btn btn-dark" onclick="event.preventDefault();
+                            {{-- <a href="" class="btn btn-dark" onclick="event.preventDefault();
                                                     document.getElementById('delete').submit();"><i
-                                    class="fas fa-trash"></i></a>
+                                    class="fas fa-trash"></i></a> --}}
                             <form id="delete" action="{{ route('absent.destroy', ['absent' => $value->id]) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
-                                {{-- <input type="submit" class="btn btn-danger"
-                                                                    value="Delete"> --}}
+                                <button type="submit" class="btn btn-dark"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                         @php
@@ -103,8 +102,8 @@ $ui = $datas[0]->user_id;
                 </div>
                 <div class="modal-body">
                     {{-- <div class="form-group"> --}}
-                        {{-- <label for="bulan">Month</label> --}}
-                        {{-- <select class="form-control" id="bulan">
+                    {{-- <label for="bulan">Month</label> --}}
+                    {{-- <select class="form-control" id="bulan">
                             <option value="">--Choose--</option>
                             <option value="1">January</option>
                             <option value="2">February</option>
@@ -119,17 +118,17 @@ $ui = $datas[0]->user_id;
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </select> --}}
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="from">Date From</label>
-                                <input type="date" class="form-control" id="from">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="to">Date To</label>
-                                <input type="date" class="form-control" id="to">
-                            </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="from">Date From</label>
+                            <input type="date" class="form-control" id="from">
                         </div>
-                        <input type="text" id="user_id" value="{{$ui}}" readonly hidden>
+                        <div class="form-group col-md-6">
+                            <label for="to">Date To</label>
+                            <input type="date" class="form-control" id="to">
+                        </div>
+                    </div>
+                    <input type="text" id="user_id" value="{{$ui}}" readonly hidden>
                     {{-- </div> --}}
                 </div>
                 <div class="modal-footer">
