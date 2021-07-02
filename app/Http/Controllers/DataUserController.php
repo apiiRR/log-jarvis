@@ -21,8 +21,9 @@ class DataUserController extends Controller
 
     public function index()
     {
-        $user = Auth::user();
-        $datas = $user->data;
+        $user = Auth::user()->id;
+        // $datas = $user->data;
+        $datas = Data::where('user_id', $user)->orderBy('date_in', 'ASC')->get();
         // dd($datas);
         return view('user.data', compact('datas'));
     }

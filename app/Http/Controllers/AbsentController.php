@@ -175,7 +175,7 @@ class AbsentController extends Controller
     }
 
     public function tampil($id){
-        $datas = Data::where('user_id', $id)->get();
+        $datas = Data::where('user_id', $id)->orderBy('date_in', 'ASC')->get();
         // dd($datas);
         return view('admin.absent.list', compact('datas'));
     }

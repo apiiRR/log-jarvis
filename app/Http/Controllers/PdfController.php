@@ -92,7 +92,7 @@ class PdfController extends Controller
     }
 
     public function cetak($id, $from, $to) {
-        $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->get();
+        $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->orderBy('date_in', 'ASC')->get();
         $user = User::select('name')->where('id', $id)->first();
         // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
@@ -104,7 +104,7 @@ class PdfController extends Controller
 
     public function user($from, $to) {
         // dd($from, $to);
-        $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->get();
+        $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->orderBy('date_in', 'ASC')->get();
         $user = User::select('name')->where('id', Auth::user()->id)->first();
         // $datas = $datas
         // dd($datas);

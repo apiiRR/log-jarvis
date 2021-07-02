@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'admin') { // Role Admin
-            $datas = Data::all();
+            $datas = Data::orderBy('date_in', 'ASC')->get();
             // dd($datas);
             return view('admin.index', compact('datas'));
         } elseif (Auth::user()->role == 'user') { // Role User

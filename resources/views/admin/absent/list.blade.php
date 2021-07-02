@@ -77,7 +77,7 @@ $ui = $datas[0]->user_id;
                     @endforelse
                     <tr>
                         <td colspan="11" class="text-center">Total</td>
-                        <td>Rp @php echo number_format($total,2,',','.') @endphp</td>
+                        <td colspan="2" class="text-left">Rp @php echo number_format($total,2,',','.') @endphp</td>
                     </tr>
                 </tbody>
                 </tbody>
