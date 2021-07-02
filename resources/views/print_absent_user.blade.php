@@ -65,7 +65,7 @@
             <div class="col-xs text-left">
                 <small>Project : {{$datas[0]->user->project->nama}}</small><br />
                 <small>Employee : {{$datas[0]->user->name}}</small><br />
-                <small>Period : {{$namaBulan}}</small>
+                {{-- <small>Period : {{$namaBulan}}</small> --}}
             </div>
             <div class="col-xs text-right">
                 <div style="margin-right: 65px">

@@ -22,7 +22,7 @@ class DataUserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $datas = $user->datas;
+        $datas = $user->data;
         // dd($datas);
         return view('user.data', compact('datas'));
     }

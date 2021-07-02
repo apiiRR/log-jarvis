@@ -4,7 +4,11 @@
 @section('content')
 @php
 $control = App\Models\Control::where('id', 1)->first();
-// dd($control);
+// dd($datas);
+
+// foreach ($datas as $value) {
+// dd($value);
+// }
 @endphp
 <div class="page-content py-3">
 
@@ -38,7 +42,7 @@ $control = App\Models\Control::where('id', 1)->first();
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($datas as $key => $value)
+                                    @foreach ($datas as $key => $value)
                                     <tr>
                                         <th scope="row">{{$key + 1}}</th>
                                         <td>{{$value->date_in}}</td>
@@ -51,24 +55,20 @@ $control = App\Models\Control::where('id', 1)->first();
                                         <td class="d-flex justify-content-center">
                                             <a href="{{route('data.edit', ['data' => $value->id])}}"
                                                 class="btn btn-dark mr-2"><i class="fas fa-edit"></i></a>
-                                            <a href="" class="btn btn-dark" onclick="event.preventDefault();
+                                            {{-- <a href="" class="btn btn-dark" onclick="event.preventDefault();
                                                     document.getElementById('delete').submit();"><i
-                                                    class="fas fa-trash"></i></a>
+                                                    class="fas fa-trash"></i></a> --}}
                                             <form id="delete"
                                                 action="{{ route('data.destroy', ['data' => $value->id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                {{--<input type="submit" class="btn btn-danger"
-                                                                    value="Delete"> --}}
+                                                {{-- <button type="submit" class="btn btn-danger" value="Delete"> --}}
+                                                <button type="submit" class="btn btn-dark mr-2"><i class="fas fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="9">No Data</td>
-                                    </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="table-responsive">
@@ -130,7 +130,8 @@ $control = App\Models\Control::where('id', 1)->first();
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <a class="btn text-white" style="background-color: black"
-                    onclick="this.href='/cpdf/'+ document.getElementById('from').value + '/' + document.getElementById('to').value" target="_blank">Print</a>
+                    onclick="this.href='/cpdf/'+ document.getElementById('from').value + '/' + document.getElementById('to').value"
+                    target="_blank">Print</a>
             </div>
         </div>
     </div>

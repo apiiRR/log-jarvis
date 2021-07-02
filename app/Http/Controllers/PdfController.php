@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data;
+use App\Models\User;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,17 +93,19 @@ class PdfController extends Controller
 
     public function cetak($id, $from, $to) {
         $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->get();
+        $user = User::select('name')->where('id', $id)->first();
         // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
         $pdf = PDF::loadView('print_absent', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('absent.pdf');
+        return $pdf->download($user->name.'_'.$from.'-'.$to.'.pdf');
     }
 
     public function user($from, $to) {
         // dd($from, $to);
         $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->get();
+        $user = User::select('name')->where('id', Auth::user()->id)->first();
         // $datas = $datas
         // dd($datas);
         // dd($datas[1]->user->name);
@@ -110,6 +113,6 @@ class PdfController extends Controller
         $pdf = PDF::loadView('print_absent_user', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->download('absent.pdf');
+        return $pdf->download($user->name.'_'.$from.'-'.$to.'.pdf');
     }
 }
