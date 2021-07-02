@@ -98,7 +98,7 @@ $control = App\Models\Control::where('id', 1)->first();
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="bulan">Month</label>
                     <select class="form-control" id="bulan">
                         <option value="">--Choose--</option>
@@ -115,12 +115,22 @@ $control = App\Models\Control::where('id', 1)->first();
                         <option value="11">November</option>
                         <option value="12">December</option>
                     </select>
+                </div> --}}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="from">Date From</label>
+                        <input type="date" class="form-control" id="from">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="to">Date To</label>
+                        <input type="date" class="form-control" id="to">
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <a class="btn text-white" style="background-color: black"
-                    onclick="this.href='/cpdf/'+ document.getElementById('bulan').value " target="_blank">Print</a>
+                    onclick="this.href='/cpdf/'+ document.getElementById('from').value + '/' + document.getElementById('to').value" target="_blank">Print</a>
             </div>
         </div>
     </div>
@@ -151,7 +161,8 @@ $control = App\Models\Control::where('id', 1)->first();
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="tanggal">Date In</label>
-                            <input required type="date" class="tanggal form-control" id="tanggal_in" name="date_in" onchange="ubahTanggalMasuk()">
+                            <input required type="date" class="tanggal form-control" id="tanggal_in" name="date_in"
+                                onchange="ubahTanggalMasuk()">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="hari">Day In</label>
@@ -159,13 +170,15 @@ $control = App\Models\Control::where('id', 1)->first();
                         </div>
                         <div class="form-group col-md-4">
                             <label for="time-in">Time In</label>
-                            <input required type="time" class="form-control" id="time-in" name="time_in" onchange="totalJam()">
+                            <input required type="time" class="form-control" id="time-in" name="time_in"
+                                onchange="totalJam()">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="tanggal">Date Out</label>
-                            <input required type="date" class="tanggal form-control" id="tanggal_out" name="date_out" onchange="ubahTanggalSelesai()">
+                            <input required type="date" class="tanggal form-control" id="tanggal_out" name="date_out"
+                                onchange="ubahTanggalSelesai()">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="hari">Day Out</label>
@@ -173,7 +186,8 @@ $control = App\Models\Control::where('id', 1)->first();
                         </div>
                         <div class="form-group col-md-4">
                             <label for="time-out">Time Out</label>
-                            <input required type="time" class="form-control" id="time_out" name="time_out" onchange="totalJam()">
+                            <input required type="time" class="form-control" id="time_out" name="time_out"
+                                onchange="totalJam()">
                         </div>
                     </div>
                     <div class="form-row">

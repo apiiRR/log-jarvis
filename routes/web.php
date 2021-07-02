@@ -45,9 +45,9 @@ Route::get('control', 'ControlController@index');
 
 Route::post('/status/update', 'ControlController@updateStatus')->name('users.update.status');
 
-Route::get('/pdf/{id}/{month}', 'PdfController@cetak');
+Route::get('/pdf/{id}/{from}/{to}', 'PdfController@cetak');
 
-Route::get('/cpdf/{month}', 'PdfController@user');
+Route::get('/cpdf/{from}/{to}', 'PdfController@user');
 
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 

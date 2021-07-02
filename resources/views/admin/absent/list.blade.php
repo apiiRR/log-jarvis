@@ -102,9 +102,9 @@ $ui = $datas[0]->user_id;
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="bulan">Month</label>
-                        <select class="form-control" id="bulan">
+                    {{-- <div class="form-group"> --}}
+                        {{-- <label for="bulan">Month</label> --}}
+                        {{-- <select class="form-control" id="bulan">
                             <option value="">--Choose--</option>
                             <option value="1">January</option>
                             <option value="2">February</option>
@@ -118,14 +118,24 @@ $ui = $datas[0]->user_id;
                             <option value="10">October</option>
                             <option value="11">November</option>
                             <option value="12">December</option>
-                        </select>
+                        </select> --}}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="from">Date From</label>
+                                <input type="date" class="form-control" id="from">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="to">Date To</label>
+                                <input type="date" class="form-control" id="to">
+                            </div>
+                        </div>
                         <input type="text" id="user_id" value="{{$ui}}" readonly hidden>
-                    </div>
+                    {{-- </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a class="btn text-white" style="background-color: black"
-                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('bulan').value "
+                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('from').value + '/' +  document.getElementById('to').value"
                         target="_blank">Print</a>
                 </div>
             </div>

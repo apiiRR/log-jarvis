@@ -90,8 +90,8 @@ class PdfController extends Controller
         //
     }
 
-    public function cetak($id, $month) {
-        $datas = Data::where('user_id', $id)->whereMonth('date_in', $month)->get();
+    public function cetak($id, $from, $to) {
+        $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->get();
         // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
         $pdf = PDF::loadView('print_absent', compact('datas'));
@@ -100,9 +100,9 @@ class PdfController extends Controller
         return $pdf->download('absent.pdf');
     }
 
-    public function user($month) {
+    public function user($from, $to) {
         // dd($from, $to);
-        $datas = Data::where('user_id', Auth::user()->id)->whereMonth('date_in', $month)->get();
+        $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->get();
         // $datas = $datas
         // dd($datas);
         // dd($datas[1]->user->name);
