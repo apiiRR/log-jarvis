@@ -114,7 +114,7 @@ class DataUserController extends Controller
         // dd(bedaHari($tanggal));
 
         if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggalMasuk, $holiday))) {
-            if ($total_menit >= 240) {
+            if ($total_menit >= 240 && $total_menit < 480) {
                 $lembur = "weekend 1";
             } elseif ($total_menit >= 480) {
                 $lembur = "weekend 2";
