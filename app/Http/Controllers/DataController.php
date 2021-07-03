@@ -178,8 +178,6 @@ class DataController extends Controller
             }
         }
 
-        dd($lembur);
-
         $intensive = 0;
         switch ($lembur) {
             case "lembur 1":
