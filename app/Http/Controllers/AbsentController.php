@@ -179,4 +179,10 @@ class AbsentController extends Controller
         // dd($datas);
         return view('admin.absent.list', compact('datas'));
     }
+
+    public function range($id, $from, $to){
+        $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->orderBy('date_in', 'ASC')->get();
+        // dd($datas);
+        return view('admin.absent.list', compact('datas'));
+    }
 }

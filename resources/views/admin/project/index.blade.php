@@ -7,42 +7,49 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-striped text-center" style="color: black">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Project Name</th>
-                        {{-- <th scope="col">Action</th> --}}
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($project as $key => $value)
-                    <tr>
-                        <th scope="row">{{$key + 1}}</th>
-                        <td>{{$value->nama}}</td>
-                        {{-- <td class="d-flex justify-content-center">
+        <table id="example" class="table table-striped text-center w-100" style="color: black">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Project Name</th>
+                    {{-- <th scope="col">Action</th> --}}
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($project as $key => $value)
+                <tr>
+                    <th scope="row">{{$key + 1}}</th>
+                    <td>{{$value->nama}}</td>
+                    {{-- <td class="d-flex justify-content-center">
                             <a href="" class="btn btn-danger" onclick="event.preventDefault();
                                                      document.getElementById('delete').submit();"><i
                                     class="fas fa-trash"></i></a>
                             <form id="delete" action="{{ route('project.destroy', ['project' => $value->id]) }}"
-                        method="POST">
-                        @csrf
-                        @method('DELETE')
-                        {{-- <input type="submit" class="btn btn-danger"
+                    method="POST">
+                    @csrf
+                    @method('DELETE')
+                    {{-- <input type="submit" class="btn btn-danger"
                                                                     value="Delete"> --}}
-                        </form>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="9">No Data</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-            <div class="table-responsive">
-            </div>
-        </div>
+                    </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="2">No Data</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-    @endsection
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $('#example').DataTable({
+        responsive: true,
+        scrollX: true
+    });
+</script>
+@endsection

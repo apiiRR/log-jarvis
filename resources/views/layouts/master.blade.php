@@ -11,6 +11,7 @@
 
     <title>Admin</title>
 
+    @stack('tambahan')
     <!-- Custom fonts for this template-->
     <link href="{{asset('admin/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link
@@ -18,9 +19,10 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
     <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/style.css')}}" rel="stylesheet">
-    @stack('tambahan')
 
 </head>
 
@@ -164,9 +166,9 @@
                                 <span class="mr-2 d-none d-lg-inline small"
                                     style="color: black; font-weight:600;">{{ Auth::user()->name }}</span>
                                 @if (!empty(Auth::user()->photo))
-                                    <img class="img-profile rounded-circle" src="{{asset('images/'.Auth::user()->photo)}}">
+                                <img class="img-profile rounded-circle" src="{{asset('images/'.Auth::user()->photo)}}">
                                 @else
-                                    <img class="img-profile rounded-circle" src="{{asset('admin/img/undraw_profile.svg')}}">
+                                <img class="img-profile rounded-circle" src="{{asset('admin/img/undraw_profile.svg')}}">
                                 @endif
                             </a>
                             <!-- Dropdown - User Information -->
@@ -206,6 +208,7 @@
         <!-- End of Content Wrapper -->
 
     </div>
+    @stack('javascript')
     <!-- End of Page Wrapper -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
@@ -224,12 +227,11 @@
     <script src="{{asset('admin/js/sb-admin-2.min.js')}}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{asset('admin/vendor/chart.js/Chart.min.js')}}"></script>
+    {{-- <script src="{{asset('admin/vendor/chart.js/Chart.min.js')}}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{asset('admin/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script>
-    @stack('javascript')
+    <script src="{{asset('admin/js/demo/chart-pie-demo.js')}}"></script> --}}
     @include('sweetalert::alert')
 
 

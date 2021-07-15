@@ -27,7 +27,7 @@ $control = App\Models\Control::where('id', 1)->first();
                             @endif
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped text-center">
+                            <table id="example" class="table table-striped text-center w-100">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -220,8 +220,16 @@ $control = App\Models\Control::where('id', 1)->first();
 @endsection
 
 @push('javascript')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script>
+    $('#example').DataTable({
+        responsive: true,
+        scrollX: true
+    });
+
     function ubahTanggalMasuk() {
         let mydate = document.querySelector('#tanggal_in').value;
         /* var date = mydate.toJSON().slice(0, 10);

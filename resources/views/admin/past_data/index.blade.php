@@ -15,54 +15,60 @@
     </div>
     <!-- Card Body -->
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-striped text-center" style="color: black">
-                <thead>
-                    <tr>
-                        {{-- <th scope="col">#</th> --}}
-                        <th scope="col">Description</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Allow fill past absent</td>
-                        <td>
-                            <input type="checkbox" data-id="{{ $status->id }}" value="{{ $status->id }}" name="toggle" class="js-switch"
-                                {{ $status->kondisi == 1 ? 'checked' : '' }}>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="table-responsive">
-            </div>
-        </div>
+        <table id="example" class="table table-striped text-center w-100" style="color: black">
+            <thead>
+                <tr>
+                    {{-- <th scope="col">#</th> --}}
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Allow fill past absent</td>
+                    <td>
+                        <input type="checkbox" data-id="{{ $status->id }}" value="{{ $status->id }}" name="toggle"
+                            class="js-switch" {{ $status->kondisi == 1 ? 'checked' : '' }}>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <script>
-        let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+</div>
+<script>
+    let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 
-        elems.forEach(function (html) {
-            let switchery = new Switchery(html, {
-                size: 'small'
-            });
+    elems.forEach(function (html) {
+        let switchery = new Switchery(html, {
+            size: 'small'
         });
+    });
 
-        $('input[name=toggle]').change(function () {
-            var mode = $(this).prop('checked');
-            var id = $(this).val();
+    $('input[name=toggle]').change(function () {
+        var mode = $(this).prop('checked');
+        var id = $(this).val();
 
-            var productObj = {};
-            productObj.mode = $(this).prop('checked');
-            productObj.comment_id = $(this).val();
-            productObj._token = '{{csrf_token()}}';
+        var productObj = {};
+        productObj.mode = $(this).prop('checked');
+        productObj.comment_id = $(this).val();
+        productObj._token = '{{csrf_token()}}';
 
-            $.ajax({
-                type: "POST",
-                dataType: "JSON",
-                url: "{{ url('/status/update') }}",
-                data: productObj,
-                success: function (data) {}
-            });
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: "{{ url('/status/update') }}",
+            data: productObj,
+            success: function (data) {}
         });
-    </script>
-    @endsection
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $('#example').DataTable({
+        responsive: true,
+        scrollX: true
+    });
+</script>
+@endsection

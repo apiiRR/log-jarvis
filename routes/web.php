@@ -51,3 +51,5 @@ Route::get('/cpdf/{from}/{to}', 'PdfController@user');
 
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 
+Route::get('/list/{list_id}/{from}/{to}', 'AbsentController@range');
+
