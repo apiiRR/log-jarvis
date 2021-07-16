@@ -44,7 +44,7 @@ $ui = $datas[0]->user_id;
                     </div>
                     {{-- <button type="submit" class="btn btn-primary mb-2">Filter</button> --}}
                     <a class="btn btn-primary mb-2"
-                    onclick="this.href='/list/{{$ui}}/'+ document.getElementById('range_from').value + '/' + document.getElementById('range_to').value">Filter</a>
+                        onclick="this.href='/list/{{$ui}}/'+ document.getElementById('range_from').value + '/' + document.getElementById('range_to').value">Filter</a>
                 </form>
             </div>
         </div>
@@ -69,6 +69,9 @@ $ui = $datas[0]->user_id;
             <tbody>
                 @php
                 $total = 0;
+                $Hours = 0;
+                $Minutes = 0;
+                $totalHours = '';
                 @endphp
                 @forelse ($datas as $key => $value)
                 <tr>
@@ -96,6 +99,14 @@ $ui = $datas[0]->user_id;
                     </td>
                     @php
                     $total += $value->intensive;
+                    $totalHours = explode(':',$value->total_hours,-1);
+                    $Hours += intval($totalHours[0]);
+                    $Minutes += intval($totalHours[1]);
+                    if ($Minutes >= 60) {
+                        $Hours += 1;
+                        $Minutes = $Minutes - 60;
+                    }
+                    // dd(intval($totalHours[0]));
                     @endphp
                 </tr>
                 @empty
@@ -106,9 +117,19 @@ $ui = $datas[0]->user_id;
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="11" class="text-center">Total</td>
-                    <td colspan="2" class="text-left">Rp @php echo number_format($total,2,',','.') @endphp
-                    </td>
+                    <th colspan="7" scope="col">Total</th>
+                    {{-- <th scope="col">Name</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Day</th>
+                    <th scope="col">In</th>
+                    <th scope="col">Out</th> --}}
+                    <th scope="col">@php echo strval($Hours).':'.strval($Minutes).':00' @endphp</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    {{-- <th scope="col"></th> --}}
+                    <th colspan="3" scope="col">Rp @php echo number_format($total,2,',','.') @endphp</th>
+                    {{-- <th scope="col"></th> --}}
                 </tr>
             </tfoot>
         </table>

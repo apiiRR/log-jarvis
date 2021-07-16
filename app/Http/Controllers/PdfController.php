@@ -96,10 +96,12 @@ class PdfController extends Controller
         $user = User::select('name')->where('id', $id)->first();
         // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
+        $datas = [$datas, $from];
+        // dd($datas);
         $pdf = PDF::loadView('print_absent', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->download($user->name.'_'.$from.'-'.$to.'.pdf');
+        return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
     }
 
     public function user($from, $to) {
@@ -110,9 +112,10 @@ class PdfController extends Controller
         // dd($datas);
         // dd($datas[1]->user->name);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
+        $datas = [$datas, $from];
         $pdf = PDF::loadView('print_absent_user', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'landscape');
-        return $pdf->download($user->name.'_'.$from.'-'.$to.'.pdf');
+        return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
     }
 }

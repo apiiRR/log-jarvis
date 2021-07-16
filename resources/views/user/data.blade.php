@@ -42,6 +42,12 @@ $control = App\Models\Control::where('id', 1)->first();
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                    $total = 0;
+                                    $Hours = 0;
+                                    $Minutes = 0;
+                                    $totalHours = '';
+                                    @endphp
                                     @foreach ($datas as $key => $value)
                                     <tr>
                                         <th scope="row">{{$key + 1}}</th>
@@ -64,12 +70,33 @@ $control = App\Models\Control::where('id', 1)->first();
                                                 @csrf
                                                 @method('DELETE')
                                                 {{-- <button type="submit" class="btn btn-danger" value="Delete"> --}}
-                                                <button type="submit" class="btn btn-dark mr-2"><i class="fas fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-dark mr-2"><i
+                                                        class="fas fa-trash"></i></button>
                                             </form>
                                         </td>
+                                        @php
+                                        $total += $value->intensive;
+                                        $totalHours = explode(':',$value->total_hours,-1);
+                                        $Hours += intval($totalHours[0]);
+                                        $Minutes += intval($totalHours[1]);
+                                        if ($Minutes >= 60) {
+                                        $Hours += 1;
+                                        $Minutes = $Minutes - 60;
+                                        }
+                                        // dd(intval($totalHours[0]));
+                                        @endphp
                                     </tr>
                                     @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="5" scope="col">Total</th>
+                                        <th scope="col">@php echo strval($Hours).':'.strval($Minutes).':00' @endphp</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                             <div class="table-responsive">
                             </div>

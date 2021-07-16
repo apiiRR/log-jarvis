@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Data Absent</title>
+    <title>Time Sheet Engineer</title>
 </head>
 
 <body>
     @php
-    $date = date_create($datas[0]->date);
+    $date = date_create($datas[1]);
     $bulan = date_format($date, "n");
     $namaBulan = "";
     switch ($bulan) {
@@ -61,11 +61,14 @@
     // dd($namaBulan);
     @endphp
     <div class="container-fluid">
+        <div class="row text-center mb-2">
+            <h3>Time Sheet Engineer</h3>
+        </div>
         <div class="row">
             <div class="col-xs text-left">
-                <small>Project : {{$datas[0]->user->project->nama}}</small><br />
-                <small>Employee : {{$datas[0]->user->name}}</small><br />
-                {{-- <small>Period : {{$namaBulan}}</small> --}}
+                <small>Project : {{$datas[0][0]->user->project->nama}}</small><br />
+                <small>Employee : {{$datas[0][0]->user->name}}</small><br />
+                <small>Period : {{$namaBulan}}</small>
             </div>
             <div class="col-xs text-right">
                 <div style="margin-right: 65px">
@@ -96,8 +99,11 @@
                     <tbody>
                         @php
                         $total = 0;
+                        $Hours = 0;
+                        $Minutes = 0;
+                        $totalHours = '';
                         @endphp
-                        @foreach ($datas as $item)
+                        @foreach ($datas[0] as $item)
                         <tr>
                             <td>{{$item->date_in}}</td>
                             <td>{{$item->day_in}}</td>
@@ -110,12 +116,25 @@
                             <td>Rp @php echo number_format($item->intensive,2,',','.') @endphp</td>
                             @php
                             $total += $item->intensive;
+                            $totalHours = explode(':',$item->total_hours,-1);
+                            $Hours += intval($totalHours[0]);
+                            $Minutes += intval($totalHours[1]);
+                            if ($Minutes >= 60) {
+                            $Hours += 1;
+                            $Minutes = $Minutes - 60;
+                            }
                             @endphp
                         </tr>
                         @endforeach
-                        <tr>
-                            <td colspan="8" class="text-center">Total</td>
-                            <td>Rp @php echo number_format($total,2,',','.') @endphp</td>
+                        <tr class="text-bold" style="font-weight: bold;">
+                            <td colspan="4" class="text-bold">Total</td>
+                            <th class="text-bold">@php echo
+                                strval($Hours).':'.strval($Minutes).':00' @endphp</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <td class="text-bold">Rp @php echo number_format($total,2,',','.')
+                                @endphp</td>
                         </tr>
                     </tbody>
                 </table>
@@ -127,7 +146,7 @@
                 <br>
                 <br>
                 <br>
-                <h6>{{$datas[0]->user->name}}</h6>
+                <h6>{{$datas[0][0]->user->name}}</h6>
             </div>
             <div class="col-xs text-center">
                 <small>Manager</small>

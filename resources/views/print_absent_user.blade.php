@@ -10,12 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <title>Data Absent</title>
+    <title>Time Sheet Engineer</title>
 </head>
 
 <body>
     @php
-    $date = date_create($datas[0]->date);
+    $date = date_create($datas[1]);
     $bulan = date_format($date, "n");
     $namaBulan = "";
     switch ($bulan) {
@@ -63,9 +63,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs text-left">
-                <small>Project : {{$datas[0]->user->project->nama}}</small><br />
-                <small>Employee : {{$datas[0]->user->name}}</small><br />
-                {{-- <small>Period : {{$namaBulan}}</small> --}}
+                <small>Project : {{$datas[0][0]->user->project->nama}}</small><br />
+                <small>Employee : {{$datas[0][0]->user->name}}</small><br />
+                <small>Period : {{$namaBulan}}</small>
             </div>
             <div class="col-xs text-right">
                 <div style="margin-right: 65px">
@@ -73,7 +73,7 @@
                     <small>Jl. TB Simatupang No.18 RT.002 RW.001</small><br />
                     <small>Pasar Minggu - DKI Jakarta</small>
                 </div>
-                <img src="{{ ltrim(public_path('images/jarvis.png'), '/') }}" alt="" width="50"
+                <img src="http://absensi.jarvis-solusi.id:8000/public/images/jarvis.png" alt="" width="50"
                     style="margin-top: -45px">
             </div>
         </div>
@@ -92,7 +92,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datas as $item)
+                        @php
+                        $total = 0;
+                        $Hours = 0;
+                        $Minutes = 0;
+                        $totalHours = '';
+                        @endphp
+                        @foreach ($datas[0] as $item)
                         <tr>
                             <td>{{$item->date_in}}</td>
                             <td>{{$item->day_in}}</td>
@@ -101,8 +107,25 @@
                             <td>{{$item->total_hours}}</td>
                             <td>{{$item->activity}}</td>
                             <td>{{$item->site_name}}</td>
+                            @php
+                            $total += $item->intensive;
+                            $totalHours = explode(':',$item->total_hours,-1);
+                            $Hours += intval($totalHours[0]);
+                            $Minutes += intval($totalHours[1]);
+                            if ($Minutes >= 60) {
+                            $Hours += 1;
+                            $Minutes = $Minutes - 60;
+                            }
+                            @endphp
                         </tr>
                         @endforeach
+                        <tr class="text-bold" style="font-weight: bold;">
+                            <td colspan="4" class="text-bold">Total</td>
+                            <th class="text-bold">@php echo
+                                strval($Hours).':'.strval($Minutes).':00' @endphp</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -113,7 +136,7 @@
                 <br>
                 <br>
                 <br>
-                <h6>{{$datas[0]->user->name}}</h6>
+                <h6>{{$datas[0][0]->user->name}}</h6>
             </div>
             <div class="col-xs text-center">
                 <small>Manager</small>
