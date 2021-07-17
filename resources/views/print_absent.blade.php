@@ -76,7 +76,7 @@
                     <small>Jl. TB Simatupang No.18 RT.002 RW.001</small><br />
                     <small>Pasar Minggu - DKI Jakarta</small>
                 </div>
-                <img src="{{ ltrim(public_path('images/jarvis.png'), '/') }}" alt="" width="50"
+                <img src="<?php echo $datas[2] ?>" alt="" width="50"
                     style="margin-top: -45px">
             </div>
         </div>
