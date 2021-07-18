@@ -73,8 +73,7 @@
                     <small>Jl. TB Simatupang No.18 RT.002 RW.001</small><br />
                     <small>Pasar Minggu - DKI Jakarta</small>
                 </div>
-                <img src="<?php echo $datas[2] ?>" alt="" width="50"
-                    style="margin-top: -45px">
+                <img src="<?php echo $datas[2] ?>" alt="" width="50" style="margin-top: -45px">
             </div>
         </div>
         <div class="row">
@@ -109,6 +108,9 @@
                             <td>{{$item->site_name}}</td>
                             @php
                             $total += $item->intensive;
+                            if ($item->total_hours == "") {
+                            $item->total_hours = "00:00:00";
+                            }
                             $totalHours = explode(':',$item->total_hours,-1);
                             $Hours += intval($totalHours[0]);
                             $Minutes += intval($totalHours[1]);
@@ -121,6 +123,14 @@
                         @endforeach
                         <tr class="text-bold" style="font-weight: bold;">
                             <td colspan="4" class="text-bold">Total</td>
+                            @php
+                            if (strlen($Hours) < 2) {
+                                $Hours = '0'.$Hours;
+                            }
+                            if (strlen($Minutes) < 2) {
+                                $Minutes = '0'.$Minutes;
+                            }
+                            @endphp
                             <th class="text-bold">@php echo
                                 strval($Hours).':'.strval($Minutes).':00' @endphp</th>
                             <th></th>

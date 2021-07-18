@@ -76,7 +76,12 @@ $control = App\Models\Control::where('id', 1)->first();
                                         </td>
                                         @php
                                         $total += $value->intensive;
+                                        if ($value->total_hours == "") {
+                                        $value->total_hours = "00:00:00";
+                                        }
+                                        // dd($value->total_hours);
                                         $totalHours = explode(':',$value->total_hours,-1);
+                                        // dd($totalHours);
                                         $Hours += intval($totalHours[0]);
                                         $Minutes += intval($totalHours[1]);
                                         if ($Minutes >= 60) {
@@ -91,6 +96,14 @@ $control = App\Models\Control::where('id', 1)->first();
                                 <tfoot>
                                     <tr>
                                         <th colspan="5" scope="col">Total</th>
+                                        @php
+                                            if (strlen($Hours) < 2) {
+                                                $Hours = '0'.$Hours;
+                                            }
+                                            if (strlen($Minutes) < 2) {
+                                                $Minutes = '0'.$Minutes;
+                                            }
+                                        @endphp
                                         <th scope="col">@php echo strval($Hours).':'.strval($Minutes).':00' @endphp</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>

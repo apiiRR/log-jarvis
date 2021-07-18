@@ -99,12 +99,15 @@ $ui = $datas[0]->user_id;
                     </td>
                     @php
                     $total += $value->intensive;
+                    if ($value->total_hours == "") {
+                    $value->total_hours = "00:00:00";
+                    }
                     $totalHours = explode(':',$value->total_hours,-1);
                     $Hours += intval($totalHours[0]);
                     $Minutes += intval($totalHours[1]);
                     if ($Minutes >= 60) {
-                        $Hours += 1;
-                        $Minutes = $Minutes - 60;
+                    $Hours += 1;
+                    $Minutes = $Minutes - 60;
                     }
                     // dd(intval($totalHours[0]));
                     @endphp
@@ -124,6 +127,14 @@ $ui = $datas[0]->user_id;
                     <th scope="col">Day</th>
                     <th scope="col">In</th>
                     <th scope="col">Out</th> --}}
+                    @php
+                    if (strlen($Hours) < 2) { 
+                        $Hours='0' .$Hours; 
+                    } 
+                    if (strlen($Minutes) < 2) { 
+                        $Minutes='0' .$Minutes;
+                    } 
+                    @endphp 
                     <th scope="col">@php echo strval($Hours).':'.strval($Minutes).':00' @endphp</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
