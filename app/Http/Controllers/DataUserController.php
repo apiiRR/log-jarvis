@@ -19,6 +19,18 @@ class DataUserController extends Controller
         $this->middleware('auth');
     }
 
+    public function kirimTelegram($pesan) {
+        $pesan = json_encode($pesan);
+        $API = "https://api.telegram.org/bot1949808016:AAFeTd4niLCy_wCg6wG2Ds1UCocwpVLynWw/sendmessage?chat_id=-1001331458056&text=$pesan";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_URL, $API);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
+
     public function index()
     {
         $user = Auth::user()->id;
@@ -55,6 +67,10 @@ class DataUserController extends Controller
             "time_in" => $time,
             "user_id" => Auth::user()->id,
         ]);
+
+        $nameUser = Auth::user()->name;
+
+        $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time ));
 
         return redirect('/')->with('success', 'Time In Successful');
     }
@@ -172,6 +188,10 @@ class DataUserController extends Controller
             "remark" => $lembur,
             "intensive" => $intensive,
         ]);
+
+        $nameUser = Auth::user()->name;
+
+        $this->kirimTelegram(urlencode("CHECK OUT : \n\nUsername : " .$nameUser. "\nDate In : " .$request["date_in"]. "\nDay In : " .$request["day_in"]. "\nTime In : " .$request["time_in"]. "\nDate Out : " .$request["date_out"]. "\nTime Out : " .$request["time_out"]. "\nTotal Hours : " .$request["total_hours"]. "\nActivity : " .$request["activity"]. "\nSite Name : " .$request["site_name"]));
 
         return redirect('/')->with('success', 'Time Out Successful');
     }
