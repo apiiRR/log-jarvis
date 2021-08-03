@@ -76,6 +76,9 @@
                 <img src="<?php echo $datas[2] ?>" alt="" width="50" style="margin-top: -45px">
             </div>
         </div>
+        <div class="row text-center mb-3">
+            <h3>Timesheet Engineer</h3>
+        </div>
         <div class="row">
             <div class="col-xs">
                 <table class="table table-striped table-sm table-bordered border border-dark text-center">
@@ -124,17 +127,11 @@
                         <tr class="text-bold" style="font-weight: bold;">
                             <td colspan="4" class="text-bold">Total</td>
                             @php
-                            if (strlen($Hours) < 2) {
-                                $Hours = '0'.$Hours;
-                            }
-                            if (strlen($Minutes) < 2) {
-                                $Minutes = '0'.$Minutes;
-                            }
-                            @endphp
-                            <th class="text-bold">@php echo
+                            if (strlen($Hours) < 2) { $Hours='0' .$Hours; } if (strlen($Minutes) < 2) { $Minutes='0'
+                                .$Minutes; } @endphp <th class="text-bold">@php echo
                                 strval($Hours).':'.strval($Minutes).':00' @endphp</th>
-                            <th></th>
-                            <th></th>
+                                <th></th>
+                                <th></th>
                         </tr>
                     </tbody>
                 </table>
