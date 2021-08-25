@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('role', 'user')->get();
+        // dd($users);
         return view('admin.user.index', compact('users'));
     }
 
@@ -63,7 +65,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $datas = User::find($id);
+        $project = Project::all();
+        // dd($datas);
+        return view('admin.user.update', [
+            'datas' => $datas,
+            'project' => $project,
+        ]);
     }
 
     /**
@@ -75,7 +83,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        // dd($user);
+        foreach ($request->states as $value) {
+            $user->project()->attach($value);
+        }
+        
+        return redirect('/management_account')->with('success', 'Data saved successfully');
     }
 
     /**

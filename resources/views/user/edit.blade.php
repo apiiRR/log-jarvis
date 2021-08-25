@@ -1,93 +1,123 @@
-@extends('layouts.app')
-
-
+@extends('layouts.user')
 @section('content')
-<section class="auth-section login-section text-center py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card shadow">
-                    <div class="card-header text-center">{{ __('Form Edit') }}</div>
-                    <div class="card-body">
-                        <form action="{{route('data.update', ['data' => $data->id])}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="form-group">
-                                <label for="nama">Name</label>
-                                <input required type="text" class="form-control" id="nama"
-                                    value="{{Auth::user()->name}}" readonly>
-                                <input required type="text" value="{{Auth::user()->id}}" name="name" readonly hidden>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="tanggal">Date In</label>
-                                    @if ($data == null)
-                                    <input required type="date" class="tanggal form-control" id="tanggal_in"
-                                        name="date_in" onchange="ubahTanggalMasuk()">
-                                    @else
-                                    <input required type="date" value="{{$data->date_in}}" class="tanggal form-control"
-                                        id="tanggal_in" name="date_in" onchange="ubahTanggalMasuk()">
-                                    @endif
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="hari">Day In</label>
-                                    <input required type="text" value="{{$data->day_in}}" class="form-control"
-                                        id="hari_in" name="day_in" readonly>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="time-in">Time In</label>
-                                    @if ($data == null)
-                                    <input required type="time" class="form-control" id="time-in" name="time_in"
-                                        onchange="totalJam()">
-                                    @else
-                                    <input required type="time" value="{{$data->time_in}}" class="form-control"
-                                        id="time-in" name="time_in" onchange="totalJam()">
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="tanggal">Date Out</label>
-                                    <input required type="date" value="{{$data->date_out}}" class="tanggal form-control"
-                                        id="tanggal_out" name="date_out" onchange="ubahTanggalSelesai()">
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="hari">Day Out</label>
-                                    <input required type="text" value="{{$data->day_out}}" class="form-control"
-                                        id="hari_out" name="day_out" readonly>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="time-out">Time Out</label>
-                                    <input required type="time" value="{{$data->time_out}}" class="form-control"
-                                        id="time_out" name="time_out" onchange="totalJam()">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="total">Total Hours</label>
-                                    <input required type="text" value="{{$data->total_hours}}" class="form-control" id="total" name="total_hours"
-                                        readonly>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="site">Site Name</label>
-                                    <input required type="text" value="{{$data->site_name}}" class="form-control" id="site" name="site_name" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="activity">Activity</label>
-                                <textarea required type="text" class="form-control" id="activity"
-                                    name="activity">{{$data->activity}}</textarea>
-                            </div>
-                            <button type="submit" class="btn col-md-12 text-white"
-                                style="background-color: black">Update</button>
-                        </form>
+
+<div class="card shadow" style="margin-bottom: 100px;">
+    <div class="card-header text-center">{{ __('Edit Data') }}</div>
+    <div class="card-body">
+        <form action="{{route('data.update', ['data' => $data->id])}}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="nama">Name</label>
+                        <input required type="text" class="form-control" id="nama" value="{{Auth::user()->name}}"
+                            readonly>
+                        <input required type="text" value="{{Auth::user()->id}}" name="name" readonly hidden>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="tanggal">Date In</label>
+                        @if ($data == null)
+                        <input required type="date" class="tanggal form-control" id="tanggal_in" name="date_in"
+                            onchange="ubahTanggalMasuk()">
+                        @else
+                        <input required type="date" value="{{$data->date_in}}" class="tanggal form-control"
+                            id="tanggal_in" name="date_in" onchange="ubahTanggalMasuk()">
+                        @endif
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="hari">Day In</label>
+                        <input required type="text" value="{{$data->day_in}}" class="form-control" id="hari_in"
+                            name="day_in" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="time-in">Time In</label>
+                        @if ($data == null)
+                        <input required type="time" class="form-control" id="time-in" name="time_in"
+                            onchange="totalJam()">
+                        @else
+                        <input required type="time" value="{{$data->time_in}}" class="form-control" id="time-in"
+                            name="time_in" onchange="totalJam()">
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="tanggal">Date Out</label>
+                        <input required type="date" value="{{$data->date_out}}" class="tanggal form-control"
+                            id="tanggal_out" name="date_out" onchange="ubahTanggalSelesai()">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="hari">Day Out</label>
+                        <input required type="text" value="{{$data->day_out}}" class="form-control" id="hari_out"
+                            name="day_out" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="time-out">Time Out</label>
+                        <input required type="time" value="{{$data->time_out}}" class="form-control" id="time_out"
+                            name="time_out" onchange="totalJam()">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="total">Total Hours</label>
+                        <input required type="text" value="{{$data->total_hours}}" class="form-control" id="total"
+                            name="total_hours" readonly>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="site">Site Name</label>
+                        <input required type="text" value="{{$data->site_name}}" class="form-control" id="site"
+                            name="site_name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="activity">Project</label>
+                        <select class="form-select border-bottom" id="project" name="project" required disabled>
+                            <option selected value="{{ $data->project_id }}">{{ $data->project->nama }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="activity">Activity</label>
+                        <textarea required type="text" class="form-control" id="activity"
+                            name="activity">{{$data->activity}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn btn-primary" type="submit">Button</button>
+            </div>
+        </form>
     </div>
-    <!--//container-->
-</section>
+</div>
 @endsection
 
 @push('javascript')

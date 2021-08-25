@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfilController extends Controller
@@ -19,8 +20,9 @@ class ProfilController extends Controller
     }
 
     public function index()
-    {
-        return view('user.profil.index');
+    {   
+        $datas = User::where('id', Auth::user()->id)->first();
+        return view('user.profil.index', compact('datas'));
     }
 
     /**
@@ -107,7 +109,7 @@ class ProfilController extends Controller
             ]);
         }
 
-        return redirect('/profil')->with('success', 'Updated Data Successful');
+        return redirect('/profil')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**

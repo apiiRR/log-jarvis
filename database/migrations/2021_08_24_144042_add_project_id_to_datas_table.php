@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDataIdToUsersTable extends Migration
+class AddProjectIdToDatasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddDataIdToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('project_id')->default('6');
+        Schema::table('datas', function (Blueprint $table) {
+            $table->unsignedBigInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 
@@ -25,7 +26,8 @@ class AddDataIdToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('datas', function (Blueprint $table) {
+            $table->dropForeign(['project_id']);
         });
     }
 }

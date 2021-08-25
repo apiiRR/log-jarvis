@@ -12,7 +12,12 @@ class Project extends Model
     public $timestamps = false;
 
     
-    public function user() {
-        return $this->hasOne('App\Models\User');
+    public function user()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
+
+    public function data() {
+        return $this->hasMany('App\Models\Data');
     }
 }

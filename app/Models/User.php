@@ -21,7 +21,6 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'project_id'
     ];
 
     /**
@@ -47,8 +46,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Data');
     }
 
-    public function project() {
-        return $this->belongsTo('App\Models\Project');
+    public function project()
+    {
+        return $this->belongsToMany('App\Models\Project');
     }
 
     public function datas() {

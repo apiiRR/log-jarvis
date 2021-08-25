@@ -3,7 +3,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold" style="color: black">Holiday Data</h6>
+        <h6 class="m-0 font-weight-bold text-dark">Add New Data</h6>
     </div>
     <!-- Card Body -->
     <div class="card-body">
@@ -17,7 +17,7 @@
                 <label for="day">Day</label>
                 <input type="text" class="form-control" id="day" name="day" readonly>
             </div>
-            <button type="submit" class="btn col-md-12" style="background-color: #C9CACA; font-weight:bolder; color:black">Save</button>
+            <button type="submit" class="btn col-md-12 btn-primary">Save</button>
         </form>
     </div>
     @endsection

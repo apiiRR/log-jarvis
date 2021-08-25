@@ -224,7 +224,7 @@ class DataController extends Controller
             "intensive" => $intensive,
         ]);
 
-        return redirect('/data_user')->with('success', 'Data updated successfully');
+        return redirect('/data_user')->with('success', 'Data Berhasil Diupdate');
     }
 
     /**
@@ -236,6 +236,6 @@ class DataController extends Controller
     public function destroy($id)
     {
         Data::destroy($id);
-        return redirect('/data_user')->with('success', 'Data deleted successfully');
+        return redirect('/data_user')->with('success', 'Data Berhasil Dihapus');
     }
 }

@@ -58,12 +58,12 @@
     default:
     echo "Data tidak ditemukan ";
     }
-    // dd($namaBulan);
+    // dd($datas);
     @endphp
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="margin-top: -50px;">
             <div class="col-xs text-left">
-                <small>Project : {{$datas[0][0]->user->project->nama}}</small><br />
+                <small>Project : {{$datas[0][0]->project->nama}}</small><br />
                 <small>Employee : {{$datas[0][0]->user->name}}</small><br />
                 <small>Period : {{$namaBulan}}</small>
             </div>

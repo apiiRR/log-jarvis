@@ -91,8 +91,8 @@ class PdfController extends Controller
         //
     }
 
-    public function cetak($id, $from, $to) {
-        $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->orderBy('date_in', 'ASC')->get();
+    public function cetak($id, $from, $to, $project) {
+        $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->where('project_id', $project)->orderBy('date_in', 'ASC')->get();
         $user = User::select('name')->where('id', $id)->first();
         // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
@@ -108,9 +108,9 @@ class PdfController extends Controller
         return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
     }
 
-    public function user($from, $to) {
+    public function user($from, $to, $project) {
         // dd($from, $to);
-        $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->orderBy('date_in', 'ASC')->get();
+        $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->where('project_id', $project)->orderBy('date_in', 'ASC')->get();
         $user = User::select('name')->where('id', Auth::user()->id)->first();
         // $datas = $datas
         // dd($datas);

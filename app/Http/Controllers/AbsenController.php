@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Data;
 use App\Models\Holiday;
+use App\Models\Project;
 use App\Models\User;
+use App\Models\User_Has_Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class DataUserController extends Controller
+class AbsenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,14 +36,15 @@ class DataUserController extends Controller
 
     public function index()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $user = Auth::user()->id;
-        // $datas = $user->data;
-        $datas = Data::where('user_id', $user)->orderBy('date_in', 'DESC')->get();
-        $keterangan = User::where('id', Auth::user()->id)->get();
-        // dd($datas);
-        return view('user.data', [
+        $tanggal = date("Y-m-d");
+        $keterangan = Data::where('user_id', $user)->where('date_in', $tanggal)->orderBy('id', 'desc')->first();
+        $datas = User::where('id', Auth::user()->id)->get();
+        // dd($datas->project()->get());
+        return view('user.absen', [
             'datas' => $datas,
-            'keterangan' => $keterangan,
+            'keterangan' => $keterangan
         ]);
     }
 
@@ -61,23 +64,31 @@ class DataUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {   
+    public function store(Request $request)
+    {
         date_default_timezone_set('Asia/Jakarta');
         $time = date("H:i");
         $tanggal = date("Y-m-d");
+
+        $request->validate([
+            "project" => 'required|numeric',
+        ]);
+
+        // dd($request["project"]);
 
         $data = Data::create([
             "date_in" => $tanggal,
             "time_in" => $time,
             "user_id" => Auth::user()->id,
+            "project_id" => $request["project"],
         ]);
 
         $nameUser = Auth::user()->name;
+        $namaProject = Project::find($request["project"]);
 
-        /* $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time )); */
+        $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time. "\nProject : " .$namaProject->nama ));
 
-        return redirect('/')->with('success', 'Time In Successful');
+        return redirect('/absen')->with('success', 'Absen Masuk Berhasil');
     }
 
     /**
@@ -198,7 +209,7 @@ class DataUserController extends Controller
 
         $this->kirimTelegram(urlencode("CHECK OUT : \n\nUsername : " .$nameUser. "\nDate In : " .$request["date_in"]. "\nDay In : " .$request["day_in"]. "\nTime In : " .$request["time_in"]. "\nDate Out : " .$request["date_out"]. "\nTime Out : " .$request["time_out"]. "\nTotal Hours : " .$request["total_hours"]. "\nActivity : " .$request["activity"]. "\nSite Name : " .$request["site_name"]));
 
-        return redirect('/')->with('success', 'Time Out Successful');
+        return redirect('/absen')->with('success', 'Absen Keluar Berhasil');
     }
 
     /**
@@ -212,94 +223,14 @@ class DataUserController extends Controller
         //
     }
 
-    public function past(Request $request)
-    {   
-        $lembur = "none";
-        $total = $request["total_hours"];
-        // dd($request);
-        $time_out = $request["time_out"];
-        // dd(strtotime($time_out) >= strtotime('21:00'));
-        $total_jam = explode(':',$total, 2);
-        $t_jam = intval($total_jam[0]);
-        $t_menit = intval($total_jam[1]);
-        $total_menit = ($t_jam * 60) + $t_menit;
-        $tanggalMasuk = $request["date_in"];
-        $tanggalKeluar = $request["date_out"];
-        $hari = $request["day_in"];
-        $holiday = Holiday::select('date')->get()->toArray();
-
-        if (($hari == 'Saturday') or ($hari == 'Sunday') or (in_array($tanggalMasuk, $holiday))) {
-            if ($total_menit >= 240 && $total_menit < 480) {
-                $lembur = "weekend 1";
-            } elseif ($total_menit >= 480) {
-                $lembur = "weekend 2";
-            }
-        } else {
-            if (strtotime($time_out) >= strtotime('21:00')) {
-                $lembur = "lembur 1";
-            } elseif ($tanggalMasuk != $tanggalKeluar) {
-                $lembur = "lembur 2";
-            }
-        }
-
-        $intensive = 0;
-        switch ($lembur) {
-            case "lembur 1":
-                $intensive = 25000;
-                break;
-            case "lembur 2":
-                $intensive = 50000;
-                break;
-            case "weekend 1":
-                $intensive = 50000;
-                break;
-            case "weekend 2":
-                $intensive = 150000;
-            break;
-            default:
-                $intensive = 0;
-        }
-
-        $request->validate([
-            'date_in' => 'required|date',
-            'day_in' => 'required|max:255',
-            'time_in' => 'required',
-            'date_out' => 'required|date',
-            'day_out' => 'required|max:255',
-            'time_out' => 'required',
-            'total_hours' => 'required',
-            'activity' => 'required|max:255',
-            'site_name' => 'required|max:255',
-            'name' => 'required',
-            'project' => 'required|numeric',
-        ]);
-
-        $data = Data::create([
-            "date_in" => $request["date_in"],
-            "day_in" => $request["day_in"],
-            "time_in" => $request["time_in"],
-            "date_out" => $request["date_out"],
-            "day_out" => $request["day_out"],
-            "time_out" => $request["time_out"],
-            "total_hours" => $request["total_hours"],
-            "activity" => $request["activity"],
-            "site_name" => $request["site_name"],
-            "user_id" => $request["name"],
-            "project_id" => $request["project"],
-            "remark" => $lembur,
-            "intensive" => $intensive,
-        ]);
-
-        return redirect('/data_user')->with('success', 'Data Berhasil Ditambahkan');
-    }
-
-    public function pastSakit($date_in, $time_in, $project)
+    public function sakit($project)
     {
+        date_default_timezone_set('Asia/Jakarta');
+        $tanggal = date("Y-m-d");
         $activity = "Izin Sakit";
 
         $data = Data::create([
-            "date_in" => $date_in,
-            "time_in" => $time_in,
+            "date_in" => $tanggal,
             "user_id" => Auth::user()->id,
             "project_id" => $project,
             "activity" => $activity,
@@ -308,11 +239,10 @@ class DataUserController extends Controller
         ]);
 
         $nameUser = Auth::user()->name;
+        $namaProject = Project::find($project);
 
-        /* $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time )); */
+        $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nProject : " .$namaProject->nama. "\nKeterangan : " .$activity ));
 
-        return redirect('/data_user')->with('success', 'Data Berhasil Ditambahkan');
+        return redirect('/absen')->with('success', 'Data Berhasil Ditambahkan');
     }
-
-
 }

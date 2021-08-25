@@ -9,30 +9,36 @@
 @endpush
 
 @section('content')
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Administrator</h1>
+</div>
 <div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold" style="color: black;">Control Admin</h6>
-    </div>
-    <!-- Card Body -->
     <div class="card-body">
-        <table id="example" class="table table-striped text-center w-100" style="color: black">
-            <thead>
-                <tr>
-                    {{-- <th scope="col">#</th> --}}
-                    <th scope="col">Description</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Allow fill past absent</td>
-                    <td>
-                        <input type="checkbox" data-id="{{ $status->id }}" value="{{ $status->id }}" name="toggle"
-                            class="js-switch" {{ $status->kondisi == 1 ? 'checked' : '' }}>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td>Allow fill past absent</td>
+                        <td>
+                            <input type="checkbox" data-id="{{ $status->id }}" value="{{ $status->id }}" name="toggle"
+                                class="js-switch" {{ $status->kondisi == 1 ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 <script>
@@ -62,13 +68,12 @@
         });
     });
 </script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('admin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('admin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
-    $('#example').DataTable({
-        responsive: true,
-        scrollX: true
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
     });
 </script>
 @endsection

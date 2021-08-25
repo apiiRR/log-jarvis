@@ -31,6 +31,8 @@ Route::resource('project', 'ProjectController');
 
 Route::resource('absent', 'AbsentController');
 
+Route::resource('absen', 'AbsenController');
+
 Route::resource('profile', 'ProfileController');
 
 Route::resource('holiday', 'HolidayController');
@@ -39,15 +41,20 @@ Route::resource('profil', 'ProfilController');
 
 Route::resource('data_user', 'DataUserController');
 
-Route::resource('user', 'UserController');
+Route::resource('management_account', 'UserController');
 
 Route::get('control', 'ControlController@index');
 
 Route::post('/status/update', 'ControlController@updateStatus')->name('users.update.status');
 
-Route::get('/pdf/{id}/{from}/{to}', 'PdfController@cetak');
+Route::post('/past', 'DataUserController@past')->name('data.past');
 
-Route::get('/cpdf/{from}/{to}', 'PdfController@user');
+Route::get('/sakit/{project}', 'AbsenController@sakit')->name('absen.sakit');
+Route::get('/pastSakit/{date_in}/{time_in}/{project}', 'DataUserController@pastSakit');
+
+Route::get('/pdf/{id}/{from}/{to}/{project}', 'PdfController@cetak');
+
+Route::get('/cpdf/{from}/{to}/{project}', 'PdfController@user');
 
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 

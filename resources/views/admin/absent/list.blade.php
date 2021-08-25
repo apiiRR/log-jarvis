@@ -12,7 +12,7 @@ $ui = $datas[0]->user_id;
 @endphp
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold" style="color: black">Absents Data</h6>
+        <h6 class="m-0 font-weight-bold text-dark">Absents Data</h6>
     </div>
     <!-- Card Body -->
     <div class="card-body" style="overflow-x: scroll">
@@ -77,7 +77,7 @@ $ui = $datas[0]->user_id;
                 <tr>
                     <th scope="row">{{++$key}}</th>
                     <td>{{$value->user->name}}</td>
-                    <td>{{$value->user->project->nama}}</td>
+                    <td>{{$value->project->nama}}</td>
                     <td>{{$value->date_in}}</td>
                     <td>{{$value->day_in}}</td>
                     <td>{{$value->time_in}}</td>
@@ -88,13 +88,13 @@ $ui = $datas[0]->user_id;
                     <td>{{$value->remark}}</td>
                     <td>Rp @php echo number_format($value->intensive,2,',','.') @endphp</td>
                     <td class="d-flex justify-content-center">
-                        <a href="{{route('absent.edit', ['absent' => $value->id])}}" class="btn btn-dark mr-2"><i
+                        <a href="{{route('absent.edit', ['absent' => $value->id])}}" class="btn btn-info mr-2"><i
                                 class="fas fa-edit"></i></a>
                         <form id="delete" action="{{ route('absent.destroy', ['absent' => $value->id]) }}"
                             method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-dark"><i class="fas fa-trash"></i></button>
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     </td>
                     @php
@@ -128,19 +128,13 @@ $ui = $datas[0]->user_id;
                     <th scope="col">In</th>
                     <th scope="col">Out</th> --}}
                     @php
-                    if (strlen($Hours) < 2) { 
-                        $Hours='0' .$Hours; 
-                    } 
-                    if (strlen($Minutes) < 2) { 
-                        $Minutes='0' .$Minutes;
-                    } 
-                    @endphp 
-                    <th scope="col">@php echo strval($Hours).':'.strval($Minutes).':00' @endphp</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    {{-- <th scope="col"></th> --}}
-                    <th colspan="3" scope="col">Rp @php echo number_format($total,2,',','.') @endphp</th>
-                    {{-- <th scope="col"></th> --}}
+                    if (strlen($Hours) < 2) { $Hours='0' .$Hours; } if (strlen($Minutes) < 2) { $Minutes='0' .$Minutes;
+                        } @endphp <th scope="col">@php echo strval($Hours).':'.strval($Minutes).':00' @endphp</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        {{-- <th scope="col"></th> --}}
+                        <th colspan="3" scope="col">Rp @php echo number_format($total,2,',','.') @endphp</th>
+                        {{-- <th scope="col"></th> --}}
                 </tr>
             </tfoot>
         </table>
@@ -183,13 +177,24 @@ $ui = $datas[0]->user_id;
                             <input type="date" class="form-control" id="to">
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="exampleFormControlSelect1">Project</label>
+                            <select class="form-control" id="project">
+                                <option>--Pilih Project--</option>
+                                @foreach ($data_user->project as $data)
+                                    <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <input type="text" id="user_id" value="{{$ui}}" readonly hidden>
                     {{-- </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a class="btn text-white" style="background-color: black"
-                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('from').value + '/' +  document.getElementById('to').value"
+                    <a class="btn text-white btn-success"
+                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('from').value + '/' +  document.getElementById('to').value + '/' +  document.getElementById('project').value"
                         target="_blank">Print</a>
                 </div>
             </div>
