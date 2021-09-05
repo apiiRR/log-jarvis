@@ -177,7 +177,7 @@ class AbsentController extends Controller
     public function tampil($id){
         $datas = Data::where('user_id', $id)->orderBy('date_in', 'ASC')->get();
         $data_user = User::find($id);
-        // dd($datas);
+        // dd($data_user->project);
         return view('admin.absent.list', [
             'datas' => $datas,
             'data_user' => $data_user,
@@ -186,7 +186,11 @@ class AbsentController extends Controller
 
     public function range($id, $from, $to){
         $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->orderBy('date_in', 'ASC')->get();
+        $data_user = User::find($id);
         // dd($datas);
-        return view('admin.absent.list', compact('datas'));
+        return view('admin.absent.list', [
+            'datas' => $datas,
+            'data_user' => $data_user,
+        ]);
     }
 }
