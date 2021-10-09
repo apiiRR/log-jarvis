@@ -160,11 +160,11 @@
                 <h6>Bayu Hastomo</h6>
             </div>
             <div class="col-xs text-right">
-                <small>Director</small>
+                <small>{{ $datas[3] }}</small>
                 <br>
                 <br>
                 <br>
-                <h6>Tedhi Achdiana</h6>
+                <h6>{{ $datas[4] }}</h6>
             </div>
         </div>
     </div>

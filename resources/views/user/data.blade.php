@@ -19,12 +19,12 @@ $control = App\Models\Control::where('id', 1)->first();
 <div class="card shadow px-2 py-4">
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <input id="from" type="text" class="form-control pilihan border-bottom" placeholder="Tanggal Awal" onfocus="(this.type='date')"
-        onblur="(this.type='text')">
+            <input id="from" type="text" class="form-control pilihan border-bottom" placeholder="Tanggal Awal"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
         </div>
         <div class="col-md-4 col-sm-12">
-            <input id="to" type="text" class="form-control pilihan border-bottom" placeholder="Tanggal Akhir" onfocus="(this.type='date')"
-        onblur="(this.type='text')">
+            <input id="to" type="text" class="form-control pilihan border-bottom" placeholder="Tanggal Akhir"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
         </div>
         <div class="col-md-4 col-sm-12">
             <select id="project" class="form-select pilihan border-bottom" aria-label="Default select example">
@@ -37,9 +37,20 @@ $control = App\Models\Control::where('id', 1)->first();
             </select>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <select id="name_approv" class="form-select pilihan border-bottom" aria-label="Default select example">
+                <option value="Director">Director</option>
+                <option value="Head of Operation & Maintenance">Head of Operation & Maintenance</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <input id="user_approv" type="text" class="form-control pilihan border-bottom" placeholder="Masukkan nama approver">
+        </div>
+    </div>
     <div class="d-grid gap-2">
         <a class="btn btn-success text-center mt-2"
-            onclick="this.href='/cpdf/'+ document.getElementById('from').value + '/' + document.getElementById('to').value + '/' + document.getElementById('project').value"
+            onclick="this.href='/cpdf/'+ document.getElementById('from').value + '/' + document.getElementById('to').value + '/' + document.getElementById('project').value + '/' + document.getElementById('name_approv').value + '/' + document.getElementById('user_approv').value"
             target="_blank"><i class="fas fa-print text-white"></i> Cetak</a>
         @if ($control->kondisi === 1)
         <button type="button" class="btn btn-warning text-center" data-bs-toggle="modal"
@@ -295,7 +306,9 @@ style="background-color: black">Print Data</a> --}}
                         <div class="row">
                             <div class="d-grid gap-2 mt-3">
                                 <button class="btn btn-success" type="submit">Masukkan Data Hadir</button>
-                                <a class="btn btn-danger" onclick="this.href='/pastSakit/'+ document.getElementById('tanggal_in').value + '/' + document.getElementById('time-in').value + '/' + document.getElementById('project-past').value">Masukkan Data Sakit</a>
+                                <a class="btn btn-danger"
+                                    onclick="this.href='/pastSakit/'+ document.getElementById('tanggal_in').value + '/' + document.getElementById('time-in').value + '/' + document.getElementById('project-past').value">Masukkan
+                                    Data Sakit</a>
                             </div>
                         </div>
                     </div>

@@ -52,9 +52,9 @@ Route::post('/past', 'DataUserController@past')->name('data.past');
 Route::get('/sakit/{project}', 'AbsenController@sakit')->name('absen.sakit');
 Route::get('/pastSakit/{date_in}/{time_in}/{project}', 'DataUserController@pastSakit');
 
-Route::get('/pdf/{id}/{from}/{to}/{project}', 'PdfController@cetak');
+Route::get('/pdf/{id}/{from}/{to}/{project}/{name_approv}/{user_approv}', 'PdfController@cetak');
 
-Route::get('/cpdf/{from}/{to}/{project}', 'PdfController@user');
+Route::get('/cpdf/{from}/{to}/{project}/{name_approv}/{user_approv}', 'PdfController@user');
 
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 

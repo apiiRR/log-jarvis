@@ -22,9 +22,9 @@ class AbsenController extends Controller
         $this->middleware('auth');
     }
 
-    public function kirimTelegram($pesan) {
+    public function kirimTelegram($chat_id, $pesan) {
         $pesan = json_encode($pesan);
-        $API = "https://api.telegram.org/bot1949808016:AAFeTd4niLCy_wCg6wG2Ds1UCocwpVLynWw/sendmessage?chat_id=-1001331458056&text=$pesan";
+        $API = "https://api.telegram.org/bot1949808016:AAFeTd4niLCy_wCg6wG2Ds1UCocwpVLynWw/sendmessage?chat_id=$chat_id&text=$pesan";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
@@ -85,8 +85,23 @@ class AbsenController extends Controller
 
         $nameUser = Auth::user()->name;
         $namaProject = Project::find($request["project"]);
+        // dd($namaProject->nama);
 
-        $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time. "\nProject : " .$namaProject->nama ));
+        switch ($namaProject->nama) {
+            case 'Indosat':
+                $chat_id = -1001331458056;
+                $this->kirimTelegram($chat_id, urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time. "\nProject : " .$namaProject->nama ));
+                break;
+            
+            case 'PKL Akademi':
+                $chat_id = -1001219825718;
+                $this->kirimTelegram($chat_id, urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nTime : " .$time. "\nProject : " .$namaProject->nama ));
+                break;
+            
+            default:
+                # code...
+                break;
+        }
 
         return redirect('/absen')->with('success', 'Absen Masuk Berhasil');
     }
@@ -206,8 +221,25 @@ class AbsenController extends Controller
         ]);
 
         $nameUser = Auth::user()->name;
+        $project_id = Data::select('project_id')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->first();
+        $namaProject = Project::find($project_id);
+        // dd($namaProject[0]->nama);
 
-        $this->kirimTelegram(urlencode("CHECK OUT : \n\nUsername : " .$nameUser. "\nDate In : " .$request["date_in"]. "\nDay In : " .$request["day_in"]. "\nTime In : " .$request["time_in"]. "\nDate Out : " .$request["date_out"]. "\nTime Out : " .$request["time_out"]. "\nTotal Hours : " .$request["total_hours"]. "\nActivity : " .$request["activity"]. "\nSite Name : " .$request["site_name"]));
+        switch ($namaProject[0]->nama) {
+            case 'Indosat':
+                $chat_id = -1001331458056;
+                $this->kirimTelegram($chat_id, urlencode("CHECK OUT : \n\nUsername : " .$nameUser. "\nDate In : " .$request["date_in"]. "\nDay In : " .$request["day_in"]. "\nTime In : " .$request["time_in"]. "\nDate Out : " .$request["date_out"]. "\nTime Out : " .$request["time_out"]. "\nTotal Hours : " .$request["total_hours"]. "\nActivity : " .$request["activity"]. "\nSite Name : " .$request["site_name"]));
+                break;
+            
+            case 'PKL Akademi':
+                $chat_id = -1001219825718;
+                $this->kirimTelegram($chat_id, urlencode("CHECK OUT : \n\nUsername : " .$nameUser. "\nDate In : " .$request["date_in"]. "\nDay In : " .$request["day_in"]. "\nTime In : " .$request["time_in"]. "\nDate Out : " .$request["date_out"]. "\nTime Out : " .$request["time_out"]. "\nTotal Hours : " .$request["total_hours"]. "\nActivity : " .$request["activity"]. "\nSite Name : " .$request["site_name"]));
+                break;
+            
+            default:
+                # code...
+                break;
+        }
 
         return redirect('/absen')->with('success', 'Absen Keluar Berhasil');
     }
@@ -241,7 +273,21 @@ class AbsenController extends Controller
         $nameUser = Auth::user()->name;
         $namaProject = Project::find($project);
 
-        $this->kirimTelegram(urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nProject : " .$namaProject->nama. "\nKeterangan : " .$activity ));
+        switch ($namaProject->nama) {
+            case 'Indosat':
+                $chat_id = -1001331458056;
+                $this->kirimTelegram($chat_id, urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nProject : " .$namaProject->nama. "\nKeterangan : " .$activity ));
+                break;
+            
+            case 'PKL Akademi':
+                $chat_id = -1001219825718;
+                $this->kirimTelegram($chat_id, urlencode("CHECK IN : \n\nUsername : " .$nameUser. "\nDate : " .$tanggal. "\nProject : " .$namaProject->nama. "\nKeterangan : " .$activity ));
+                break;
+            
+            default:
+                # code...
+                break;
+        }
 
         return redirect('/absen')->with('success', 'Data Berhasil Ditambahkan');
     }

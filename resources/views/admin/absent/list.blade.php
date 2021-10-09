@@ -144,7 +144,7 @@ $ui = $datas[0]->user_id;
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Range Time</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Print</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -183,9 +183,23 @@ $ui = $datas[0]->user_id;
                             <select class="form-control" id="project">
                                 <option>--Pilih Project--</option>
                                 @foreach ($data_user->project as $data)
-                                    <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                                <option value="{{ $data->id }}">{{ $data->nama }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Column Approval</label>
+                            <select id="name_approv" class="form-control"
+                                aria-label="Default select example">
+                                <option value="Director">Director</option>
+                                <option value="Head of Operation & Maintenance">Head of Operation & Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="to">Name Approver</label>
+                            <input type="text" class="form-control" id="user_approv">
                         </div>
                     </div>
                     <input type="text" id="user_id" value="{{$ui}}" readonly hidden>
@@ -194,7 +208,7 @@ $ui = $datas[0]->user_id;
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a class="btn text-white btn-success"
-                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('from').value + '/' +  document.getElementById('to').value + '/' +  document.getElementById('project').value"
+                        onclick="this.href='/pdf/'+ document.getElementById('user_id').value + '/' + document.getElementById('from').value + '/' +  document.getElementById('to').value + '/' +  document.getElementById('project').value + '/' + document.getElementById('name_approv').value + '/' + document.getElementById('user_approv').value"
                         target="_blank">Print</a>
                 </div>
             </div>

@@ -91,7 +91,7 @@ class PdfController extends Controller
         //
     }
 
-    public function cetak($id, $from, $to, $project) {
+    public function cetak($id, $from, $to, $project, $name_approv, $user_approv) {
         $datas = Data::where('user_id', $id)->whereBetween('date_in', [$from, $to])->where('project_id', $project)->orderBy('date_in', 'ASC')->get();
         $user = User::select('name')->where('id', $id)->first();
         // dd($datas);
@@ -100,7 +100,7 @@ class PdfController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $pic = 'data:image/'. $type . ';base64,' . base64_encode($data);
-        $datas = [$datas, $from, $pic];
+        $datas = [$datas, $from, $pic, $name_approv, $user_approv];
         // dd($datas);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('print_absent', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
@@ -108,7 +108,7 @@ class PdfController extends Controller
         return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
     }
 
-    public function user($from, $to, $project) {
+    public function user($from, $to, $project, $name_approv, $user_approv) {
         // dd($from, $to);
         $datas = Data::where('user_id', Auth::user()->id)->whereBetween('date_in', [$from, $to])->where('project_id', $project)->orderBy('date_in', 'ASC')->get();
         $user = User::select('name')->where('id', Auth::user()->id)->first();
@@ -120,7 +120,7 @@ class PdfController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $pic = 'data:image/'. $type . ';base64,' . base64_encode($data);
-        $datas = [$datas, $from, $pic];
+        $datas = [$datas, $from, $pic, $name_approv, $user_approv];
         // dd($datas);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('print_absent_user', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
