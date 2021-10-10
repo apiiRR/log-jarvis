@@ -49,7 +49,7 @@ $month_name = date("F", mktime(0, 0, 0, $month_num, 10));
 <div class="card border border-1 shadow mt-4" style="margin-bottom: 100px">
     <div class="card-body">
         <div class="d-grid gap-2 col-12 mx-auto">
-            @if ($keterangan === null)
+            {{-- @if ($keterangan === null)
             <button class="btn btn-primary" type="submit" style="font-size: 25px;">
                 <i class="fas fa-angle-double-right text-white"></i> Absen Masuk
             </button>
@@ -84,6 +84,26 @@ $month_name = date("F", mktime(0, 0, 0, $month_num, 10));
             <button class="btn btn-danger" type="button" style="font-size: 25px" disabled><i
                     class="fas fa-ban text-white"></i>
                 Izin Sakit</button>
+            @endif --}}
+            @if ($keterangan->activity === null)
+            <button class="btn btn-primary" type="submit" style="font-size: 25px" disabled>
+                <i class="fas fa-angle-double-right text-white"></i> Absen Masuk
+            </button>
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                style="font-size: 25px"><i class="fas fa-angle-double-left text-white"></i> Absen Keluar</button>
+            <button class="btn btn-danger" type="button" style="font-size: 25px" disabled><i
+                    class="fas fa-ban text-white"></i>
+                Izin Sakit</button>
+            @else
+            <button class="btn btn-primary" type="submit" style="font-size: 25px;">
+                <i class="fas fa-angle-double-right text-white"></i> Absen Masuk
+            </button>
+            <button class="btn btn-success" type="button" style="font-size: 25px" disabled><i
+                    class="fas fa-angle-double-left text-white"></i> Absen Keluar </button>
+            <a class="btn btn-danger" style="font-size: 25px"
+                onclick="this.href='/sakit/'+ document.getElementById('project').value"><i
+                    class="fas fa-ban text-white"></i>
+                Izin Sakit</a>
             @endif
         </div>
     </div>

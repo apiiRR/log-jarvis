@@ -39,9 +39,9 @@ class AbsenController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         $user = Auth::user()->id;
         $tanggal = date("Y-m-d");
-        $keterangan = Data::where('user_id', $user)->where('date_in', $tanggal)->orderBy('id', 'desc')->first();
+        $keterangan = Data::where('user_id', $user)->orderBy('id', 'desc')->first();
         $datas = User::where('id', Auth::user()->id)->get();
-        // dd($datas->project()->get());
+        // dd($keterangan);
         return view('user.absen', [
             'datas' => $datas,
             'keterangan' => $keterangan
