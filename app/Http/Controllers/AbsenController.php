@@ -41,7 +41,13 @@ class AbsenController extends Controller
         $tanggal = date("Y-m-d");
         $keterangan = Data::where('user_id', $user)->orderBy('id', 'desc')->first();
         $datas = User::where('id', Auth::user()->id)->get();
-        // dd($keterangan);
+        /* if ($keterangan) {
+            $keterangan = $keterangan;
+        } else {
+            $keterangan = "null";
+        } */
+        // dd($keterangan['activity']);
+        
         return view('user.absen', [
             'datas' => $datas,
             'keterangan' => $keterangan

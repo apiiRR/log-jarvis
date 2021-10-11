@@ -85,7 +85,7 @@ $month_name = date("F", mktime(0, 0, 0, $month_num, 10));
                     class="fas fa-ban text-white"></i>
                 Izin Sakit</button>
             @endif --}}
-            @if ($keterangan->activity === null)
+            @if ($keterangan and ($keterangan['activity'] === null))
             <button class="btn btn-primary" type="submit" style="font-size: 25px" disabled>
                 <i class="fas fa-angle-double-right text-white"></i> Absen Masuk
             </button>
