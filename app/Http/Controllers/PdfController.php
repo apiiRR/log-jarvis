@@ -104,7 +104,7 @@ class PdfController extends Controller
         // dd($datas);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('print_absent', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
-        $pdf->setPaper('A4', 'landscape');
+        $pdf->setPaper('A4', 'potrait');
         return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
     }
 
@@ -124,7 +124,7 @@ class PdfController extends Controller
         // dd($datas);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('print_absent_user', compact('datas'));
         // $pdf = PDF::loadView('print_absent', $datas);
-        $pdf->setPaper('A4', 'landscape');
+        $pdf->setPaper('A4', 'potrait');
         return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
     }
 }

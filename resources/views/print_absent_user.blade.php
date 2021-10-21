@@ -81,7 +81,7 @@
         </div>
         <div class="row">
             <div class="col-xs">
-                <table class="table table-striped table-sm table-bordered border border-dark text-center">
+                <table class="table table-striped table-sm table-bordered border border-dark text-center" style="font-size: 10px;">
                     <thead>
                         <tr class="bg-danger text-white">
                             <th scope="col">Date</th>
