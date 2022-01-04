@@ -11,6 +11,10 @@
             @method('PUT')
             <form>
                 <div class="form-group">
+                    <label for="formGroupExampleInput">NIP</label>
+                    <input type="text" class="form-control" value="{{ $datas->nip }}" name="nip">
+                </div>
+                <div class="form-group">
                     <label for="formGroupExampleInput">Name</label>
                     <input type="text" class="form-control" value="{{ $datas->name }}" readonly>
                 </div>
@@ -20,13 +24,22 @@
                 </div>
                 <div class="form-group">
                     <label>Project</label>
-                    <select class="js-example-basic-multiple form-control" name="states[]" multiple="multiple">
+                    <div style="border: 1px solid #c8c9cf; border-radius: 8px" class="px-2">
                         @foreach ($project as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        <div class="custom-control custom-checkbox custom-inline">
+                            <input type="checkbox" class="custom-control-input" id="custom{{ $item->id }}"
+                                value="{{ $item->id }}" name="states[]" @foreach ($datas->project as $value)
+                            @if ($value->id == $item->id)
+                            checked
+                            @endif
+                            @endforeach>
+                            <label class="custom-control-label" for="custom{{ $item->id }}">{{ $item->nama }}</label>
+                        </div>
                         @endforeach
-                    </select>
+                    </div>
                 </div>
-                {{-- <input type="text" class="form-control" value="{{ $datas->id }}" readonly hidden name="user_id"> --}}
+                {{-- <input type="text" class="form-control" value="{{ $datas->id }}" readonly hidden name="user_id">
+                --}}
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
             </form>
         </form>
@@ -34,11 +47,4 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2({
-            placeholder: "Select Project"
-        });
-    });
-</script>
 @endsection

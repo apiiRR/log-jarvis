@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">NIP</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Project</th>
@@ -20,6 +21,7 @@
                 <tfoot>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">NIP</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Project</th>
@@ -30,6 +32,7 @@
                     @foreach ($users as $key => $value)
                     <tr>
                         <th scope="row">{{$key + 1}}</th>
+                        <th>{{ $value->nip }}</th>
                         <td>{{$value->name}}</td>
                         <td>{{$value->email}}</td>
                         <td>
@@ -38,7 +41,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="{{ route('management_account.edit', ['management_account' => $value->id ]) }}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i>  Tambah Project</a>
+                            <a href="{{ route('management_account.edit', ['management_account' => $value->id ]) }}" class="btn btn-primary"><i class="fas fa-cog"></i> Setting Account</a>
                         </td>
                     </tr>
                     @endforeach

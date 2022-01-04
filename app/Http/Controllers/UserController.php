@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\User;
+use App\Models\User_Has_Project;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -67,7 +68,6 @@ class UserController extends Controller
     {
         $datas = User::find($id);
         $project = Project::all();
-        // dd($datas);
         return view('admin.user.update', [
             'datas' => $datas,
             'project' => $project,
@@ -84,7 +84,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        // dd($user);
+        $user->nip = $request->nip;
+        $user->save();
+        
         foreach ($request->states as $value) {
             $user->project()->attach($value);
         }

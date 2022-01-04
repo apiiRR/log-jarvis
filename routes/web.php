@@ -43,7 +43,13 @@ Route::resource('data_user', 'DataUserController');
 
 Route::resource('management_account', 'UserController');
 
+Route::resource('pay_slip', 'PayController');
+
 Route::get('control', 'ControlController@index');
+
+Route::get('/pay_slip/overtime/{id}/{from}/{to}', 'PayController@overtime');
+
+Route::get('/pay_slip/user/{id}', 'PayController@user_current');
 
 Route::post('/status/update', 'ControlController@updateStatus')->name('users.update.status');
 
@@ -56,7 +62,15 @@ Route::get('/pdf/{id}/{from}/{to}/{project}/{name_approv}/{user_approv}', 'PdfCo
 
 Route::get('/cpdf/{from}/{to}/{project}/{name_approv}/{user_approv}', 'PdfController@user');
 
+Route::get('/cetak_payslip/{id}', 'PdfController@slip');
+
 Route::get('/list/{list_id}', 'AbsentController@tampil');
 
 Route::get('/list/{list_id}/{from}/{to}', 'AbsentController@range');
+
+Route::get('/send-email/{id}', 'PayController@email');
+
+Route::get('/pay', function () {
+    return view('pay_slip');
+});
 

@@ -81,6 +81,12 @@
                     <span>Holiday</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('pay_slip.index')}}">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <span>Pay Slip</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

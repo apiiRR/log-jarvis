@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data;
+use App\Models\Pay;
 use App\Models\User;
 use PDF;
 use Illuminate\Http\Request;
@@ -126,5 +127,21 @@ class PdfController extends Controller
         // $pdf = PDF::loadView('print_absent', $datas);
         $pdf->setPaper('A4', 'potrait');
         return $pdf->download('Time_Sheet_Engineer_'.$user->name.'.pdf');
+    }
+
+    public function slip($id) {
+        $pay_data = Pay::select('pay_slip.*', 'users.name', 'users.nip')->join('users', 'pay_slip.user_id', '=', 'users.id')->where("pay_slip.id", $id)->first();
+        // dd($datas);
+        // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));
+        $path = base_path('jarvis.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $pic = 'data:image/'. $type . ';base64,' . base64_encode($data);
+        $datas = [$pay_data, $pic];
+        // dd($datas);
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('print_slip', compact('datas'));
+        // $pdf = PDF::loadView('print_absent', $datas);
+        $pdf->setPaper('A4', 'potrait');
+        return $pdf->download('Pay_Slip'.$pay_data->name.'.pdf');
     }
 }
