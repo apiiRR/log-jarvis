@@ -29,51 +29,32 @@
         <div class="card">
             <div class="card-body">
 
-                <form>
+                <form method="POST" action="{{route('profile.update', ['profile' => Auth::user()->id])}}" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
 
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" name="first_name" class="form-control">
+                                <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}">
                             </div>
 
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" name="first_name" class="form-control">
+                                <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}">
                             </div>
 
                             <div class="form-group">
                                 <label>New Password</label>
-                                <input type="text" name="" class="form-control">
+                                <input type="text" name="password" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label>Retype New Password</label>
-                                <input type="text" name="" class="form-control">
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-6">
-
-                            <div>
-
-                                <div class="form-group">
-                                    <div>
-                                        <img src="https://static.thenounproject.com/png/643663-200.png">
-                                    </div>
-                                    <input type="file" name="" class="form-control" style="border:0;">
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="form-group">
-                                    <label>Project</label>
-                                    <input type="text" name="" class="form-control">
-                                </div>
+                                <input type="text" name="password" class="form-control">
                             </div>
 
                         </div>
@@ -83,8 +64,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group" style="float: right;">
-                                <button class="btn btn-info">Cancel</button>
-                                <button class="btn btn-primary">Save</button>
+                                <button class="btn btn-primary" type="submit">Save</button>
                             </div>
                         </div>
                     </div>

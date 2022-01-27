@@ -67,10 +67,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $datas = User::find($id);
-        $project = Project::all();
+        $projects = Project::all();
         return view('admin.user.update', [
             'datas' => $datas,
-            'project' => $project,
+            'projects' => $projects,
         ]);
     }
 
@@ -83,12 +83,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $listProject = [];
         $user = User::find($id);
         $user->nip = $request->nip;
+        $user->name = $request->name;
+        $user->email = $request->email;
         $user->save();
         
-        foreach ($request->states as $value) {
-            $user->project()->attach($value);
+        foreach ($user->project as $value) {
+            array_push($listProject, $value->id);
+        }
+
+        if (!empty($request->pilih)) {
+            foreach ($request->pilih as $value) {
+                if (!in_array($value, $listProject)) {
+                    $user->project()->attach($value);
+                }
+            }
         }
         
         return redirect('/management_account')->with('success', 'Data saved successfully');

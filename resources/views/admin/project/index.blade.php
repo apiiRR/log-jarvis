@@ -14,22 +14,35 @@
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
+                        <th>Aksi</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @php
-                        $no = 1;
+                    $no = 1;
                     @endphp
                     @foreach ($project as $item)
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $item->nama }}</td>
+                        <td class="d-flex justify-content-center">
+                            <form id="delete" action="{{ route('project.destroy', ['project' => $item->id]) }}"
+                                method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button onclick="if (confirm('Apakah anda yakin menghapus project ini? Hal ini akan mengakibatkan seluruh data yang berhubungan dengan project ini akan hilang.') == false) {
+                                    return false;
+                                }" type="submit" class="btn btn-dark"><i
+                                        class="fas fa-trash text-white"></i></button>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

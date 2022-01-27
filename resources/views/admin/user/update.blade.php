@@ -1,4 +1,43 @@
 @extends('layouts.master')
+<style>
+    .multiselect {
+        width: 100%;
+    }
+
+    .selectBox {
+        position: relative;
+    }
+
+    .selectBox select {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px #a0a0a0 solid;
+        height: 120px;
+        overflow: scroll;
+    }
+
+    #checkboxes label {
+        display: block;
+        padding: 5px;
+    }
+
+    #checkboxes label:hover {
+        background-color: #1e90ff;
+        color: black;
+    }
+</style>
 
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -16,30 +55,33 @@
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">Name</label>
-                    <input type="text" class="form-control" value="{{ $datas->name }}" readonly>
+                    <input type="text" class="form-control" value="{{ $datas->name }}" name="name">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Email</label>
-                    <input type="text" class="form-control" value="{{ $datas->email }}" readonly>
+                    <input type="email" class="form-control" value="{{ $datas->email }}" name="email">
                 </div>
                 <div class="form-group">
-                    <label>Project</label>
-                    <div style="border: 1px solid #c8c9cf; border-radius: 8px" class="px-2">
-                        @foreach ($project as $item)
-                        <div class="custom-control custom-checkbox custom-inline">
-                            <input type="checkbox" class="custom-control-input" id="custom{{ $item->id }}"
-                                value="{{ $item->id }}" name="states[]" @foreach ($datas->project as $value)
-                            @if ($value->id == $item->id)
-                            checked
-                            @endif
-                            @endforeach>
-                            <label class="custom-control-label" for="custom{{ $item->id }}">{{ $item->nama }}</label>
+                    <label for="formGroupExampleInput2">Project</label>
+                    <div class="multiselect">
+                        <div class="selectBox" onclick="showCheckboxes()">
+                            <select>
+                                <option readonly>-- Choose Project --</option>
+                            </select>
+                            <div class="overSelect"></div>
                         </div>
-                        @endforeach
+                        <div id="checkboxes">
+                            @foreach ($projects as $value)
+                                <label for="{{ $value->nama }}">
+                                <input type="checkbox" id="{{ $value->nama }}" name="pilih[]" value="{{ $value->id }}" @foreach ($datas->project as $item)
+                                    @if ($value->id === $item->id)
+                                        checked
+                                    @endif
+                                @endforeach/> {{ $value->nama }}</label>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
-                {{-- <input type="text" class="form-control" value="{{ $datas->id }}" readonly hidden name="user_id">
-                --}}
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
             </form>
         </form>
@@ -47,4 +89,18 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+    var expanded = false;
+
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+</script>
 @endsection

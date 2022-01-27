@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Data;
 use App\Models\Project;
+use App\Models\User_Has_Project;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -96,6 +98,8 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        $deletedData = Data::where('project_id', $id)->delete();
+        $deletedUser = User_Has_Project::where('project_id', $id)->delete();
         Project::destroy($id);
         return redirect('/project')->with('success', 'Data deleted successfully');
     }

@@ -73,4 +73,3 @@ Route::get('/send-email/{id}', 'PayController@email');
 Route::get('/pay', function () {
     return view('pay_slip');
 });
-
