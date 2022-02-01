@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Data;
+use App\Models\Pay;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\User_Has_Project;
@@ -113,6 +115,21 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dataData = Data::where('user_id', $id)->delete();
+        $data_pay = Pay::where('user_id', $id)->delete();
+        $dataProject = User_Has_Project::where('user_id', $id)->delete();
+        User::destroy($id);
+        return redirect('/management_account')->with('success', 'Data deleted successfully');
+    }
+
+    public function hapusProject($user, $project)
+    {
+        $deletedData = User_Has_Project::where('user_id', $user)->where('project_id', $project)->delete();
+        if ($deletedData) {
+            $data = true;
+        } else {
+            $data = false;
+        }
+        return response()->json($data);
     }
 }

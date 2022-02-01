@@ -70,6 +70,14 @@ Route::get('/list/{list_id}/{from}/{to}', 'AbsentController@range');
 
 Route::get('/send-email/{id}', 'PayController@email');
 
+Route::get('/hapusProject/{user_id}/{project_id}', 'UserController@hapusProject');
+
+Route::get('/forgotPassword', 'ResetPasswordController@index');
+
+Route::get('/cekEmail/{email}', 'ResetPasswordController@cekEmail');
+
+Route::get('/updateEmail/{email}/{pass}', 'ResetPasswordController@update');
+
 Route::get('/pay', function () {
     return view('pay_slip');
 });
