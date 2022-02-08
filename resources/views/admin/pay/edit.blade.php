@@ -58,7 +58,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control" id="basic-sallary" name="basic-sallary"
+                        <input type="number" class="form-control number-separator" id="basic-sallary" name="basic-sallary"
                             onkeyup="earning()" value="{{ $pay_data->basic_sallary }}">
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control" id="bpjs-tk" name="bpjs-tk"
+                        <input type="number" class="form-control number-separator" id="bpjs-tk" name="bpjs-tk"
                             onkeyup="earning()" value="{{ $pay_data->bpjs_tk }}">
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control" id="bpjs-kes" name="bpjs-kes"
+                        <input type="number" class="form-control number-separator" id="bpjs-kes" name="bpjs-kes"
                             onkeyup="earning()" value="{{ $pay_data->bpjs_kes }}">
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control" id="certification" name="certification"
+                        <input type="number" class="form-control number-separator" id="certification" name="certification"
                             onkeyup="earning()" value="{{ $pay_data->certificate_allowance }}">
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control" id="tax" name="tax" onkeyup="deduction()" value="{{ $pay_data->tax }}">
+                        <input type="number" class="form-control number-separator" id="tax" name="tax" onkeyup="deduction()" value="{{ $pay_data->tax }}">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -152,7 +152,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control" id="laptop" name="laptop"
+                        <input type="number" class="form-control number-separator" id="laptop" name="laptop"
                             onkeyup="deduction()" value="{{ $pay_data->laptop }}">
                     </div>
                 </div>
@@ -310,6 +310,7 @@
 </form>
 
 <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('js/easy-number-separator.js') }}"></script>
 <script>
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
         "November", "December"
@@ -358,8 +359,9 @@
 
     function overtime() {
         if ((user.val() != "") && (awal.val() != "") && (akhir.val() != "")) {
-            $.get('overtime/' + user.val() + '/' + awal.val() + '/' + akhir.val(), function (data) {
+            $.get('/pay_slip/overtime/' + user.val() + '/' + awal.val() + '/' + akhir.val(), function (data) {
                 parseFloat(overtime_tot.val(data))
+                // console.log(data)
                 earning()
                 net_total()
             })
@@ -367,8 +369,8 @@
     }
 
     function earning() {
-        sub1 = parseFloat(basic_sallary.val()) + parseFloat(bpjs_kes.val()) + parseFloat(bpjs_tk.val()) + parseFloat(
-            certification.val()) + parseFloat(overtime_tot.val())
+        sub1 = parseFloat(basic_sallary.val().replace(/,/g, '')) + parseFloat(bpjs_kes.val().replace(/,/g, '')) + parseFloat(bpjs_tk.val().replace(/,/g, '')) + parseFloat(
+            certification.val().replace(/,/g, '')) + parseFloat(overtime_tot.val().replace(/,/g, ''))
         sub_earning.val(sub1)
         net_total()
     }
@@ -376,7 +378,7 @@
     earning()
 
     function deduction() {
-        sub2 = parseFloat(tax.val()) + parseFloat(laptop.val())
+        sub2 = parseFloat(tax.val().replace(/,/g, '')) + parseFloat(laptop.val().replace(/,/g, ''))
         sub_deduction.val(sub2)
         net_total()
     }
@@ -396,14 +398,14 @@
         pay_name.html($('#pilih-user option:selected').text())
         pay_id.html(id.val())
         pay_title.html(title.val())
-        pay_basic_sallary.html("Rp. " + format.format(basic_sallary.val()))
-        pay_bpjs_tk.html("Rp. " + format.format(bpjs_tk.val()))
-        pay_bpjs_kes.html("Rp. " + format.format(bpjs_kes.val()))
-        pay_overtime.html("Rp. " + format.format(overtime_tot.val()))
-        pay_certification.html("Rp. " + format.format(certification.val()))
+        pay_basic_sallary.html("Rp. " + format.format(parseFloat(basic_sallary.val().replace(/,/g, ''))))
+        pay_bpjs_tk.html("Rp. " + format.format(parseFloat(bpjs_tk.val().replace(/,/g, ''))))
+        pay_bpjs_kes.html("Rp. " + format.format(parseFloat(bpjs_kes.val().replace(/,/g, ''))))
+        pay_overtime.html("Rp. " + format.format(parseFloat(overtime_tot.val().replace(/,/g, '')))
+        pay_certification.html("Rp. " + format.format(parseFloat(certification.val().replace(/,/g, ''))))
         pay_sub_earning.html("Rp. " + format.format(sub_earning.val()))
-        pay_tax.html("Rp. " + format.format(tax.val()))
-        pay_laptop.html("Rp. " + format.format(laptop.val()))
+        pay_tax.html("Rp. " + format.format(parseFloat(tax.val().replace(/,/g, ''))))
+        pay_laptop.html("Rp. " + format.format(parseFloat(laptop.val().replace(/,/g, ''))))
         pay_sub_deduction.html("Rp. " + format.format(sub_deduction.val()))
         pay_net.html("Rp. " + format.format(net.val()))
     }
@@ -415,5 +417,10 @@
             console.log(data.items)
         })
     }) */
+
+    easyNumberSeparator({
+        selector: '.number-separator',
+        separator: ',',
+    })
 </script>
 @endsection
