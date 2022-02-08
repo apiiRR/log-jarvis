@@ -58,7 +58,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control number-separator" id="basic-sallary" name="basic-sallary"
+                        <input type="number" class="form-control" id="basic-sallary" name="basic-sallary"
                             onkeyup="earning()" value="{{ $pay_data->basic_sallary }}">
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control number-separator" id="bpjs-tk" name="bpjs-tk"
+                        <input type="number" class="form-control" id="bpjs-tk" name="bpjs-tk"
                             onkeyup="earning()" value="{{ $pay_data->bpjs_tk }}">
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control number-separator" id="bpjs-kes" name="bpjs-kes"
+                        <input type="number" class="form-control" id="bpjs-kes" name="bpjs-kes"
                             onkeyup="earning()" value="{{ $pay_data->bpjs_kes }}">
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control number-separator" id="certification" name="certification"
+                        <input type="number" class="form-control" id="certification" name="certification"
                             onkeyup="earning()" value="{{ $pay_data->certificate_allowance }}">
                     </div>
                 </div>
@@ -143,7 +143,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control number-separator" id="tax" name="tax" onkeyup="deduction()" value="{{ $pay_data->tax }}">
+                        <input type="number" class="form-control" id="tax" name="tax" onkeyup="deduction()" value="{{ $pay_data->tax }}">
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -152,7 +152,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">Rp</div>
                         </div>
-                        <input type="number" class="form-control number-separator" id="laptop" name="laptop"
+                        <input type="number" class="form-control" id="laptop" name="laptop"
                             onkeyup="deduction()" value="{{ $pay_data->laptop }}">
                     </div>
                 </div>
@@ -310,7 +310,6 @@
 </form>
 
 <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('js/easy-number-separator.js') }}"></script>
 <script>
     const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
         "November", "December"
@@ -417,10 +416,5 @@
             console.log(data.items)
         })
     }) */
-
-    easyNumberSeparator({
-        selector: '.number-separator',
-        separator: ',',
-    })
 </script>
 @endsection
