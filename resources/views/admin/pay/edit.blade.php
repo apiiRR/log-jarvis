@@ -401,7 +401,7 @@
         pay_basic_sallary.html("Rp. " + format.format(parseFloat(basic_sallary.val().replace(/,/g, ''))))
         pay_bpjs_tk.html("Rp. " + format.format(parseFloat(bpjs_tk.val().replace(/,/g, ''))))
         pay_bpjs_kes.html("Rp. " + format.format(parseFloat(bpjs_kes.val().replace(/,/g, ''))))
-        pay_overtime.html("Rp. " + format.format(parseFloat(overtime_tot.val().replace(/,/g, '')))
+        pay_overtime.html("Rp. " + format.format(parseFloat(overtime_tot.val().replace(/,/g, ''))))
         pay_certification.html("Rp. " + format.format(parseFloat(certification.val().replace(/,/g, ''))))
         pay_sub_earning.html("Rp. " + format.format(sub_earning.val()))
         pay_tax.html("Rp. " + format.format(parseFloat(tax.val().replace(/,/g, ''))))
