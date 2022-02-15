@@ -20,6 +20,12 @@ class PayController extends Controller
     {
         $this->middleware('auth');
     }
+
+    public function number_value($value)
+    {
+        $data = intval(preg_replace("/[^-0-9\.]/","",$value));
+        return $data;
+    }
     
     public function index()
     {
@@ -53,14 +59,14 @@ class PayController extends Controller
         $data = Pay::create([
             "user_id" => $request["pilih-user"],
             "title" => $request["user-title"],
-            "basic_sallary" => $request["basic-sallary"],
-            "bpjs_tk" => $request["bpjs-tk"],
-            "bpjs_kes" => $request["bpjs-kes"],
-            "overtime" => $request["overtime-total"],
-            "certificate_allowance" => $request["certification"],
-            "tax" => $request["tax"],
-            "laptop" => $request["laptop"],
-            "total" => $request["net"],
+            "basic_sallary" => $this->number_value($request["basic-sallary"]),
+            "bpjs_tk" => $this->number_value($request["bpjs-tk"]),
+            "bpjs_kes" => $this->number_value($request["bpjs-kes"]),
+            "overtime" => $this->number_value($request["overtime-total"]),
+            "certificate_allowance" => $this->number_value($request["certification"]),
+            "tax" => $this->number_value($request["tax"]),
+            "laptop" => $this->number_value($request["laptop"]),
+            "total" => $this->number_value($request["net"]),
             "from" => $request["tanggal-awal"],
             "to" => $request["tanggal-akhir"]
         ]);

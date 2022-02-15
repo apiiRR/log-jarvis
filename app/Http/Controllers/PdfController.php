@@ -130,6 +130,7 @@ class PdfController extends Controller
     }
 
     public function slip($id) {
+        set_time_limit(1000);
         $pay_data = Pay::select('pay_slip.*', 'users.name', 'users.nip')->join('users', 'pay_slip.user_id', '=', 'users.id')->where("pay_slip.id", $id)->first();
         // dd($datas);
         // $pdf->set_base_path(realpath(APPLICATION_PATH . '../../../public/css/pdf'));

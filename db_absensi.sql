@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Agu 2021 pada 19.54
+-- Waktu pembuatan: 10 Feb 2022 pada 08.09
 -- Versi server: 10.4.6-MariaDB
 -- Versi PHP: 7.3.8
 
@@ -184,7 +184,6 @@ INSERT INTO `datas` (`id`, `date_in`, `day_in`, `time_in`, `date_out`, `day_out`
 (169, '2021-07-17', 'Saturday', '09:13:00', '2021-07-17', 'Saturday', '15:00:00', '05:47:00', 'Clear Site, Capture Log, Capture EPNM', 'WFH', 'weekend 1', 50000, 6, 15),
 (170, '2021-07-17', 'Saturday', '09:18:00', '2021-07-17', 'Saturday', '18:35:00', '09:17:00', 'Clear Site, Capture LOG, Capture EPNM', 'WFH', 'weekend 2', 150000, 6, 13),
 (171, '2021-07-17', 'Saturday', '09:45:00', '2021-07-17', 'Saturday', '16:00:00', '06:15:00', 'Clear Site, Capture EPNM, Capture LOG', 'wfh', 'weekend 1', 50000, 6, 14),
-(172, '2021-07-18', 'Sunday', '07:46:00', '2021-08-03', 'Tuesday', '05:53:00', '22:06:00', 'Mantengin Monitor.', 'Dari Rumah', 'weekend 2', 150000, 6, 12),
 (173, '2021-07-18', 'Sunday', '08:23:00', '2021-07-18', 'Sunday', '15:58:00', '07:35:00', 'validasi single leg befor after swap', 'wfh', 'weekend 1', 50000, 6, 14),
 (175, '2021-07-19', 'Monday', '09:07:00', '2021-07-19', 'Monday', '20:11:00', '11:04:00', 'Clear Validasi Alarms, Clear Site, Capture Log', 'WFH', 'none', 0, 6, 15),
 (176, '2021-07-19', 'Monday', '09:09:00', '2021-07-19', 'Monday', '18:20:00', '09:11:00', 'Clear Site, Capture LOG, Capture EPNM', 'WFH', 'none', 0, 6, 13),
@@ -283,7 +282,6 @@ INSERT INTO `datas` (`id`, `date_in`, `day_in`, `time_in`, `date_out`, `day_out`
 (274, '2021-08-19', 'Thursday', '08:01:00', '2021-08-19', 'Thursday', '18:28:00', '10:27:00', 'Clear Site, Capture LOG, Capture EPNM', 'WFH', 'none', 0, 6, 13),
 (275, '2021-08-19', 'Thursday', '08:06:00', '2021-08-19', 'Thursday', '18:16:00', '10:10:00', 'Clear Site ,Capture Log , Capture EPNM', 'WFH', 'none', 0, 6, 20),
 (276, '2021-08-19', 'Thursday', '08:44:00', '2021-08-19', 'Thursday', '18:06:00', '09:22:00', 'Clear site, capture epnm, capture log, build doc spe', 'wfh', 'none', 0, 6, 14),
-(277, '2021-08-19', 'Thursday', '11:33:00', '2021-08-19', 'Thursday', '11:33:00', '00:00:00', 'Rapat Bersama SMK Citra Negara', 'WFH', 'none', 0, 6, 12),
 (278, '2021-08-20', 'Friday', '08:24:00', '2021-08-20', 'Friday', '18:24:00', '10:00:00', 'Clear Site, Capture Log, Capture EPNM', 'WFH', 'none', 0, 6, 19),
 (279, '2021-08-20', 'Friday', '08:25:00', '2021-08-20', 'Friday', '18:24:00', '09:59:00', 'Clear Site, Capture LOG, Capture EPNM', 'WFH', 'none', 0, 6, 20),
 (280, '2021-08-20', 'Friday', '08:25:00', '2021-08-20', 'Friday', '18:04:00', '09:39:00', 'Clear Site , Capture EPNM , Capture Log', 'WFH', 'none', 0, 6, 18),
@@ -308,7 +306,8 @@ INSERT INTO `datas` (`id`, `date_in`, `day_in`, `time_in`, `date_out`, `day_out`
 (299, '2021-08-24', 'Tuesday', '09:20:00', '2021-08-24', 'Tuesday', '19:20:00', '10:00:00', 'Clear Site , Capture EPNM , Capture Log', 'WFH', 'none', 0, 6, 18),
 (301, '2021-08-24', 'Tuesday', '09:23:00', '2021-08-24', 'Tuesday', '18:30:00', '09:07:00', 'Clear Site ,Capture Log , Capture EPNM', 'WFH', 'none', 0, 6, 20),
 (302, '2021-08-24', 'Tuesday', '10:17:00', '2021-08-24', 'Tuesday', '18:11:00', '07:54:00', 'Clear Site, Capture Log, Capture EPNM, Create SPE Doc', 'wfh', 'none', 0, 6, 14),
-(306, '2021-08-24', 'Tuesday', '08:08:00', '2021-08-24', 'Tuesday', '10:10:00', '02:02:00', 'Test Server', 'Rumah', 'none', 0, 6, 16);
+(336, '2021-10-20', 'Wednesday', '09:06:00', '2021-10-20', 'Wednesday', '15:08:00', '06:02:00', 'coba', 'Rumah', 'none', 0, 6, 16),
+(337, '2021-10-21', 'Thursday', '10:07:00', '2021-10-21', 'Thursday', '14:07:00', '04:00:00', 'Coba', 'Rumah', 'none', 0, 6, 16);
 
 -- --------------------------------------------------------
 
@@ -399,6 +398,37 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `pay_slip`
+--
+
+CREATE TABLE `pay_slip` (
+  `id` int(11) NOT NULL,
+  `user_id` bigint(11) UNSIGNED NOT NULL,
+  `title` varchar(225) NOT NULL,
+  `basic_sallary` float NOT NULL,
+  `bpjs_tk` float NOT NULL,
+  `bpjs_kes` float NOT NULL,
+  `overtime` float NOT NULL,
+  `certificate_allowance` float NOT NULL,
+  `tax` float NOT NULL,
+  `laptop` float NOT NULL,
+  `total` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `to` date NOT NULL,
+  `from` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pay_slip`
+--
+
+INSERT INTO `pay_slip` (`id`, `user_id`, `title`, `basic_sallary`, `bpjs_tk`, `bpjs_kes`, `overtime`, `certificate_allowance`, `tax`, `laptop`, `total`, `created_at`, `updated_at`, `to`, `from`) VALUES
+(4, 13, 'Gajian', 500000, 0, 0, 1325000, 0, 0, 0, 1825000, '2022-02-08 09:23:56', '2022-02-08 09:49:35', '2022-02-28', '2020-01-01');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `projects`
 --
 
@@ -412,8 +442,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`id`, `nama`) VALUES
-(6, 'Indosat'),
-(7, 'PKL Akademi');
+(6, 'Indosat');
 
 -- --------------------------------------------------------
 
@@ -435,15 +464,10 @@ INSERT INTO `project_user` (`id`, `project_id`, `user_id`) VALUES
 (1, 6, 6),
 (3, 6, 13),
 (4, 6, 14),
-(6, 6, 15),
 (7, 6, 16),
-(8, 6, 17),
 (9, 6, 18),
 (10, 6, 19),
-(11, 6, 20),
-(12, 7, 16),
-(18, 6, 12),
-(19, 7, 12);
+(11, 6, 20);
 
 -- --------------------------------------------------------
 
@@ -483,24 +507,24 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`, `photo`) VALUES
-(6, 'Portal Admin Jarvis', 'jarvis@gmail.com', NULL, '$2y$10$pMo.EUZ3HfiY4lHVqnPTUu5yW4giGidS0qA7Q0FYRGSnBG86m2blq', 'admin', '0KnVNPQVG4KG51xNhss72Obe5v2SPeKxorH0ySmzsKVX1VYimSP6WsHBBA2q', '2021-06-05 19:34:51', '2021-06-26 11:00:29', '1624705229.jpg'),
-(12, 'Slamet Santoso', 'senyum.slamet@gmail.com', NULL, '$2y$10$c0fGX8TfC0Zh/V6V2ML4ie66wR6Cmr.qd3lxtUSfSdQO24NI/pzum', 'user', NULL, '2021-06-23 14:33:56', '2021-06-26 02:49:09', '1624675749.jpg'),
-(13, 'Adji Saka Ardhana', 'adjisakaardhana@gmail.com', NULL, '$2y$10$tIh73Fua8REmLN1yqX5MtOZlbB8peTBpJrZ/m6s4nsbbAxH1Fiw9W', 'user', NULL, '2021-06-24 13:02:59', '2021-06-24 13:02:59', NULL),
-(14, 'Muhammad Rifqi', 'mr.rifqi2000@gmail.com', NULL, '$2y$10$hXzzZ.LmfU9EvSU4/Vnnxequ.l.vqfyLqje9lRK/9TxFwZN9PCxjK', 'user', '1qa9kKpzIciVGrRogEDFkBOouq47cS026uIJs35g6o4nJbTQSWkOcbR8p3pX', '2021-06-24 13:03:36', '2021-06-24 13:03:36', NULL),
-(15, 'Muhammad Yusuf Salman', 'mys4lm4n@gmail.com', NULL, '$2y$10$Cwxx8cZMG6HQNu2BnQutNOBeah/fz/A1h9Q56/Uiz.3Vi8XSRcAUm', 'user', 'OVpiDtlQ5pbibuWrOv8XijvgoO5IhxVLfbaWRqth3wjSRf0mig2WIg9FGJcP', '2021-06-24 14:03:48', '2021-06-24 14:03:48', NULL),
-(16, 'Rafi Ramadhana', 'ramadhanarafi437@gmail.com', NULL, '$2y$10$UQoyrOqJMmc7Y.AEm4MZfeNV5CpXHFB3m8GDXVr9GiPN4MaeynaNa', 'user', NULL, '2021-06-26 02:40:34', '2021-08-24 19:30:56', '1629858656.jpg'),
-(17, 'A', 'aaa@nf.co.id', NULL, '$2y$10$fD495Vmj1lWd1Bs3XxmhOujUkq0Qe2NwXfupBRgoV2trB9DGx.zY.', 'user', NULL, '2021-07-20 14:39:19', '2021-07-20 14:39:19', NULL),
-(18, 'Faisal Putra Mayanggi', 'faisalputra312@gmail.com', NULL, '$2y$10$Ssx5yRyDiYg529VpJkSqHuKBakcoUWS7J8eDyVYrswkQTQ9oKDlvy', 'user', '5CQqCbxR37MlPbymXlRwKKg6IQ8rxq202Wc3LPDOwvoXsgjThxV15Ka9Qcgw', '2021-08-11 03:56:15', '2021-08-11 03:56:15', NULL),
-(19, 'Uwais Naufal Kusuma', 'uwaisnaufal@gmail.com', NULL, '$2y$10$DFAn893ZqS11xDwHvn0B.uRp0JRT.nA9dMAZygaIkAGPCYrqFXtxW', 'user', 'gzqVGtyeTqATRuFmS7xTSt19se7EFLrhIVe3eV3hxvwKEafpP4plYx6vdkn0', '2021-08-11 04:02:03', '2021-08-11 04:02:03', NULL),
-(20, 'Mohamad Hafizh Ashifani', 'mhafizh@corp.jarvis-solusi.id', NULL, '$2y$10$qGkOo/wLvWchWEfj1CqQQ.8nKdqWsnrksHlpST6iNihCZFooTEB4q', 'user', NULL, '2021-08-11 07:36:20', '2021-08-11 07:36:20', NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`, `photo`, `nip`) VALUES
+(6, 'Portal Admin Jarvis', 'jarvis@gmail.com', NULL, '$2y$10$pMo.EUZ3HfiY4lHVqnPTUu5yW4giGidS0qA7Q0FYRGSnBG86m2blq', 'admin', '0KnVNPQVG4KG51xNhss72Obe5v2SPeKxorH0ySmzsKVX1VYimSP6WsHBBA2q', '2021-06-05 19:34:51', '2021-06-26 11:00:29', '1624705229.jpg', NULL),
+(13, 'Adji Saka Ardhana', 'adjisakaardhana@corp.jarvis-solusi.id', NULL, '$2y$10$tIh73Fua8REmLN1yqX5MtOZlbB8peTBpJrZ/m6s4nsbbAxH1Fiw9W', 'user', NULL, '2021-06-24 13:02:59', '2022-02-08 10:00:38', NULL, NULL),
+(14, 'Muhammad Rifqi', 'mr.rifqi2000@gmail.com', NULL, '$2y$10$hXzzZ.LmfU9EvSU4/Vnnxequ.l.vqfyLqje9lRK/9TxFwZN9PCxjK', 'user', '1qa9kKpzIciVGrRogEDFkBOouq47cS026uIJs35g6o4nJbTQSWkOcbR8p3pX', '2021-06-24 13:03:36', '2021-06-24 13:03:36', NULL, NULL),
+(15, 'Muhammad Yusuf Salman', 'mys4lm4n@gmail.com', NULL, '$2y$10$Cwxx8cZMG6HQNu2BnQutNOBeah/fz/A1h9Q56/Uiz.3Vi8XSRcAUm', 'user', 'OVpiDtlQ5pbibuWrOv8XijvgoO5IhxVLfbaWRqth3wjSRf0mig2WIg9FGJcP', '2021-06-24 14:03:48', '2021-06-24 14:03:48', NULL, NULL),
+(16, 'Rafi Ganteng', 'ramadhanarafi437@gmail.com', NULL, '$2y$10$nZqvP7JwIF82wRK8OVspUOhJ4JzmNmjRexAtt6876ppZuhik/vigW', 'admin', NULL, '2021-06-26 02:40:34', '2022-02-08 07:57:13', '', NULL),
+(17, 'A', 'aaa@nf.co.id', NULL, '$2y$10$fD495Vmj1lWd1Bs3XxmhOujUkq0Qe2NwXfupBRgoV2trB9DGx.zY.', 'user', NULL, '2021-07-20 14:39:19', '2021-07-20 14:39:19', NULL, NULL),
+(18, 'Faisal Putra Mayanggi', 'faisalputra312@gmail.com', NULL, '$2y$10$Ssx5yRyDiYg529VpJkSqHuKBakcoUWS7J8eDyVYrswkQTQ9oKDlvy', 'user', '5CQqCbxR37MlPbymXlRwKKg6IQ8rxq202Wc3LPDOwvoXsgjThxV15Ka9Qcgw', '2021-08-11 03:56:15', '2021-08-11 03:56:15', NULL, NULL),
+(19, 'Uwais Naufal Kusuma', 'uwaisnaufal@gmail.com', NULL, '$2y$10$DFAn893ZqS11xDwHvn0B.uRp0JRT.nA9dMAZygaIkAGPCYrqFXtxW', 'user', 'gzqVGtyeTqATRuFmS7xTSt19se7EFLrhIVe3eV3hxvwKEafpP4plYx6vdkn0', '2021-08-11 04:02:03', '2021-08-11 04:02:03', NULL, NULL),
+(20, 'Mohamad Hafizh Ashifani', 'mhafizh@corp.jarvis-solusi.id', NULL, '$2y$10$qGkOo/wLvWchWEfj1CqQQ.8nKdqWsnrksHlpST6iNihCZFooTEB4q', 'user', NULL, '2021-08-11 07:36:20', '2021-08-11 07:36:20', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -546,6 +570,13 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indeks untuk tabel `pay_slip`
+--
+ALTER TABLE `pay_slip`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_pay_user` (`user_id`);
+
+--
 -- Indeks untuk tabel `projects`
 --
 ALTER TABLE `projects`
@@ -586,7 +617,7 @@ ALTER TABLE `control`
 -- AUTO_INCREMENT untuk tabel `datas`
 --
 ALTER TABLE `datas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -607,6 +638,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT untuk tabel `pay_slip`
+--
+ALTER TABLE `pay_slip`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT untuk tabel `projects`
 --
 ALTER TABLE `projects`
@@ -616,7 +653,7 @@ ALTER TABLE `projects`
 -- AUTO_INCREMENT untuk tabel `project_user`
 --
 ALTER TABLE `project_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `remarks`
@@ -640,6 +677,12 @@ ALTER TABLE `users`
 ALTER TABLE `datas`
   ADD CONSTRAINT `datas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `fk_datas_to_project` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `pay_slip`
+--
+ALTER TABLE `pay_slip`
+  ADD CONSTRAINT `fk_pay_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Ketidakleluasaan untuk tabel `project_user`
